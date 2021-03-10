@@ -16,7 +16,7 @@ function getDb() {
     $password = "EncoreUneBDD!123";
     $db = "lovevwng_BDD";
 
-    
+    //Ceci est un commentaire
     
     return new PDO("mysql:host=$server;dbname=$db;charset=utf8", "$username", "$password",
     array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
