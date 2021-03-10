@@ -14,7 +14,7 @@ function getDb() {
     $server = "10.185.0.92";
     $username = "lovevwng_admin";
     $password = "EncoreUneBDD!123";
-    $db = "lovewng_BDD";
+    $db = "lovevwng_BDD";
 
     
     
