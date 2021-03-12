@@ -1,5 +1,5 @@
 <header>
-    <div class="container">
+    <div class="container topimage">
         <img class="imgfluid" src="media/img/photoPatio.jpg" alt="Photo Patio de l'ENSC">
     </div>
 </header>
