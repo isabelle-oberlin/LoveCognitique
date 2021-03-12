@@ -1,7 +1,8 @@
 <html>
     <head>
-        <meta charset="UTF-8">
-        <title></title>
+        <?php
+            include_once 'includes/head.php';
+        ?>
     </head>
     <body>
         <?php
