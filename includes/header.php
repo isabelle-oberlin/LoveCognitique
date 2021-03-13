@@ -24,7 +24,7 @@
                 </ul>
             <?php } else { ?>
                 <ul class = "nav navbar-nav">
-                <li><a href="connexionformulaire.php">Connexion</a></li>
+                <li><a href="connexion.php">Connexion</a></li>
                 </ul>
             <?php } ?>
 
