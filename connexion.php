@@ -44,12 +44,12 @@ if (!empty($_POST['login']) and !empty($_POST['password'])) {
                 <div class="form-container">
                     <form class="form-horizontal">
                         <div class="form-group">
-                            <span class="input-icon"><i class="fa fa-user"></i></span>
+                            <i class="fas fa-user input-icon"></i>
                             <input class="form-control" type="text" placeholder="Identifiant">
                         </div>
                         <div class="form-group">
-                            <span class="input-icon"><i class="fa fa-lock"></i></span>
-                            <input class="form-control" type="password" placeholder="Password">
+                            <i class="fas fa-lock  input-icon"></i>
+                            <input class="form-control" type="password" placeholder="Mot de passe">
                         </div>
                         <button class="btn signin">Allons-y !</button>
                         <div class="remember-me">
