@@ -26,7 +26,7 @@ if (!empty($_POST['login']) and !empty($_POST['password'])) {
 
     <?php require_once "includes/header.php"; ?>
 
-    <div class="container">
+    <div class="container content">
     </br>
     <h2 class="text-center">Se connecter</h2>
     
@@ -39,8 +39,8 @@ if (!empty($_POST['login']) and !empty($_POST['password'])) {
     </br>
 
         <div class="row">
-            <div class="col-md"> </div> 
-            <div class="col-l"> 
+            <div class="col-md-3 col-sm-1"> </div> 
+            <div class="col-md-6 col-sm-10"> 
                 <div class="form-container">
                     <form class="form-horizontal">
                         <div class="form-group">
@@ -56,11 +56,11 @@ if (!empty($_POST['login']) and !empty($_POST['password'])) {
                             <input type="checkbox">
                             <label>Rester connecté</label>
                         </div>
-                        <span class="forgot-pass">Oublié votre mot de passe? <a href="#"><u>Cliquez ici</u></a></span>
+                        <span class="forgot-pass">Vous avez oublié votre mot de passe? <a href="#"><u>Cliquez ici</u></a></span>
                     </form>
                 </div>
              </div> 
-             <div class="col-md"> </div> 
+             <div class="col-md-3 col-sm-1"> </div> 
         </div>
 
     </br>

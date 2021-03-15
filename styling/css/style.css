@@ -14,14 +14,19 @@ div.botimage{
     justify-content: center;
 }
 
+/*hauteur minimale d'un bloc pour avoir le footer au bon endroit*/ 
+.content{
+    min-height: calc(100vh - 16.5em);
+}
+
 body{
     margin:0;
     padding:0;
     background: #ddd6f3;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to top, #faaca8, #ddd6f3);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to top, #faaca8, #ddd6f3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+    background: -webkit-linear-gradient(to top, #faaca8, #ddd6f3);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #faaca8, #ddd6f3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
+
 
 /* TOUT SUR LES FORMS (CONNEXION NOTAMMENT)*/
 .form-container{ font-family: 'Mukta', sans-serif; }
