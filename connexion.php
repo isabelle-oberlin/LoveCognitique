@@ -18,14 +18,15 @@ if (!empty($_POST['login']) and !empty($_POST['password'])) {
 }
 ?>
 
-<!doctype html>
 <html>
 
 <?php require_once "includes/head.php";?>
 
 <body>
-<div class="container">
+
     <?php require_once "includes/header.php"; ?>
+
+    <div class="container">
     </br>
     <h2 class="text-center">Se connecter</h2>
     
@@ -66,6 +67,8 @@ if (!empty($_POST['login']) and !empty($_POST['password'])) {
 <h3 class="text-center" >Pas encore de compte ?  <u href = "creationcompte.php">Créez-en un ici </u></h3> 
 </div>
 
-
+<?php
+            include_once 'includes/footer.php';
+        ?>
 </body>
 </html>

@@ -7,5 +7,9 @@
             include_once 'includes/header.php';
         ?>
         Work In progress
+
+        <?php
+            include_once 'includes/footer.php';
+        ?>
     </body>
 </html>
