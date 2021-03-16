@@ -3,9 +3,9 @@ require_once "includes/functions.php";
 session_start();
 
 if (!empty($_POST['login']) and !empty($_POST['password'])) {
-    $login = $_POST['login'];
-    $password = $_POST['password'];
-    $stmt = getDb()->prepare('select * from user where Mail=? and Mdp=?');
+    $login = escape($_POST['login']);
+    $password = escape($_POST['password']);
+    $stmt = getDb()->prepare('select * from Alumni where Mail=? and Mdp=?');
     $stmt->execute(array($login, $password));
     if ($stmt->rowCount() == 1) {
         // L'utilisateur existe bien et s'est connecté
@@ -42,8 +42,8 @@ if (!empty($_POST['login']) and !empty($_POST['password'])) {
             <div class="col-md-3 col-sm-1"> </div> 
             <div class="col-md-6 col-sm-10"> 
                 <div class="form-container">
-                    <form class="form-horizontal">
-                        <div class="form-group">
+                    <form class="form-horizontal" method = "POST" action = "connexion.php">
+                        <div class="form-group" >
                             <i class="fas fa-user input-icon"></i>
                             <input class="form-control" type="text" placeholder="Mail">
                         </div>
@@ -67,8 +67,6 @@ if (!empty($_POST['login']) and !empty($_POST['password'])) {
 <h3 class="text-center" >Pas encore de compte ?  <u href = "creationcompte.php">Créez-en un ici </u></h3> 
 </div>
 
-<?php
-            include_once 'includes/footer.php';
-        ?>
+<?php include_once 'includes/footer.php'; ?>
 </body>
 </html>
