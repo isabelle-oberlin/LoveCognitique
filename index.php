@@ -14,12 +14,9 @@
                 <p class="lead">Ceci est un joli site web avec un dégradé pour présenter l'annuaire des anciens</p>
                 <hr class="my-4">
                 <div>
-                    <?php
-                            $bdd = getDb();
-                            $bdd->query('select * from Commune');
-                            
-                    ?>
+                    
                 </div>                
+            </div>
         </div>
         <?php
             include_once 'includes/footer.php';
