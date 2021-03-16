@@ -5,7 +5,7 @@ session_start();
 if (!empty($_POST['login']) and !empty($_POST['password'])) {
     $login = $_POST['login'];
     $password = $_POST['password'];
-    $stmt = getDb()->prepare('select * from user where usr_login=? and usr_password=?');
+    $stmt = getDb()->prepare('select * from user where Mail=? and Mdp=?');
     $stmt->execute(array($login, $password));
     if ($stmt->rowCount() == 1) {
         // L'utilisateur existe bien et s'est connecté
@@ -45,11 +45,11 @@ if (!empty($_POST['login']) and !empty($_POST['password'])) {
                     <form class="form-horizontal">
                         <div class="form-group">
                             <i class="fas fa-user input-icon"></i>
-                            <input class="form-control" type="text" placeholder="Identifiant">
+                            <input class="form-control" type="text" placeholder="Mail">
                         </div>
                         <div class="form-group">
                             <i class="fas fa-lock  input-icon"></i>
-                            <input class="form-control" type="password" placeholder="Mot de passe">
+                            <input class="form-control" type="password" placeholder="Mdp">
                         </div>
                         <button class="btn signin">Allons-y !</button>
                         <div class="remember-me">
