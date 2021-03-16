@@ -3,6 +3,7 @@
 // Connect to the database. Returns a PDO object
 function getDb() {
     
+
     $server = "10.185.0.92";
     $username = "lovevwng_admin";
     $password = "EncoreUneBDD!123";
