@@ -22,6 +22,11 @@ require_once "includes/head.php";
   
     <?php require_once "includes/header.php"; ?>
 
+    <h3> Entrez une promo (année de sortie): </h3>
+    <div class="topnav">
+        <input type="text" placeholder="Search..">
+    </div> 
+
         <div class="container content">
         <table class="table">
             <thead>
