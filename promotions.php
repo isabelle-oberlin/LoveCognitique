@@ -19,9 +19,10 @@ require_once "includes/head.php";
 <html>
 
 <body>
-    <div class="container">
-        <?php require_once "includes/header.php"; ?>
-        
+  
+    <?php require_once "includes/header.php"; ?>
+
+        <div class="container content">
         <table class="table">
             <thead>
                 <tr>
@@ -40,11 +41,9 @@ require_once "includes/head.php";
             <?php } ?>
             <tbody>
         </table>
+        </div>
 
     <?php require_once "includes/footer.php"; ?>
-</div>
-
-<?php require_once "includes/scripts.php"; ?>
 </body>
 
 </html>
