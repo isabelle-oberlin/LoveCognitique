@@ -22,9 +22,12 @@ require_once "includes/head.php";
   
     <?php require_once "includes/header.php"; ?>
 
-    <h3> Entrez une promo (année de sortie): </h3>
-    <div class="topnav">
-        <input type="text" placeholder="Search..">
+    
+    <div class="topnav" >
+        <h3> Entrez une promo (année de sortie): </h3>
+        <form action = "promotions.php" method = "GET">
+        <input type="text" placeholder="Promo :)">
+        <i class="fas fa-search"></i>
     </div> 
 
         <div class="container content">
