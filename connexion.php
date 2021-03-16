@@ -2,14 +2,14 @@
 require_once "includes/functions.php";
 session_start();
 
-if (!empty($_POST['login']) and !empty($_POST['password'])) {
-    $login = escape($_POST['login']);
+if (!empty($_POST['mail']) and !empty($_POST['password'])) {
+    $mail = escape($_POST['mail']);
     $password = escape($_POST['password']);
-    $stmt = getDb()->prepare('select * from Alumni where Mail=? and Mdp=?');
-    $stmt->execute(array($login, $password));
+    $stmt = getLocalDb()->prepare('select * from alumni where Mail=? and Mdp=?');
+    $stmt->execute(array($mail, $password));
     if ($stmt->rowCount() == 1) {
         // L'utilisateur existe bien et s'est connecté
-        $_SESSION['login'] = $login;
+        $_SESSION['mail'] = $mail;
         redirect("index.php");
     }
     else {
@@ -31,11 +31,6 @@ if (!empty($_POST['login']) and !empty($_POST['password'])) {
     <h2 class="text-center">Se connecter</h2>
     
     
-    <?php if (isset($error)) { ?>
-        <div class="alert alert-danger">
-            <strong>Erreur !</strong> <?= $error ?>
-        </div>
-    <?php } ?>
     </br>
 
         <div class="row">
@@ -43,13 +38,20 @@ if (!empty($_POST['login']) and !empty($_POST['password'])) {
             <div class="col-md-6 col-sm-10"> 
                 <div class="form-container">
                     <form class="form-horizontal" method = "POST" action = "connexion.php">
+
+                        <?php if (isset($error)) { ?>
+                            <div class="alert alert-danger">
+                                <strong>Erreur !</strong> <?= $error ?>
+                            </div>
+                        <?php } ?>
+
                         <div class="form-group" >
                             <i class="fas fa-user input-icon"></i>
-                            <input class="form-control" type="text" placeholder="Mail">
+                            <input class="form-control" name="mail" type="text" placeholder="Mail">
                         </div>
                         <div class="form-group">
                             <i class="fas fa-lock  input-icon"></i>
-                            <input class="form-control" type="password" placeholder="Mdp">
+                            <input class="form-control" name="password" type="password" placeholder="Mdp">
                         </div>
                         <button class="btn signin">Allons-y !</button>
                         <div class="remember-me">
@@ -64,7 +66,7 @@ if (!empty($_POST['login']) and !empty($_POST['password'])) {
         </div>
 
     </br>
-<h3 class="text-center" >Pas encore de compte ?  <u href = "creationcompte.php">Créez-en un ici </u></h3> 
+<h3 class="text-center">Pas encore de compte ?  <u href = "creationcompte.php">Créez-en un ici </u></h3> 
 </div>
 
 <?php include_once 'includes/footer.php'; ?>

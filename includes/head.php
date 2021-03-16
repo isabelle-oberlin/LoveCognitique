@@ -5,7 +5,7 @@
     <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="styling/css/style.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/c954dbcada.js" crossorigin="anonymous"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">        </script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="typeahead.min.js"></script>
     <title>LoveCo</title>
 </head>

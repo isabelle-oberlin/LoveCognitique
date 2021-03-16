@@ -14,6 +14,19 @@ function getDb() {
     array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
 
+function getLocalDb() {
+    
+
+    $server = "localhost";
+    $username = "lovevwng_admin";
+    $password = "EncoreUneBDD!123";
+    $db = "lovevwng_BDD";
+
+    
+    return new PDO("mysql:host=$server;dbname=$db;charset=utf8", "$username", "$password",
+    array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+}
+
 // Check if a user is connected
 function isUserConnected() {
     return isset($_SESSION['login']);

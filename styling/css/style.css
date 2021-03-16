@@ -27,6 +27,11 @@ body{
     background: linear-gradient(to top, #faaca8, #ddd6f3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+.topnav {
+    display: flex;
+    justify-content: center;
+}
+
 
 /* TOUT SUR LES FORMS (CONNEXION NOTAMMENT)*/
 .form-container{ font-family: 'Mukta', sans-serif; }
@@ -146,7 +151,51 @@ body{
 
 /* FIN DU BLOC SUR LES FORMS */
 
-.topnav {
-    display: flex;
-    justify-content: center;
-}
+/*BLOC SEARCHBAR*/
+
+.search {
+    width:80%;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.623);
+    border-radius: 3px;
+    border: 1px solid rgb(0, 0, 0);
+  }
+  .search input {
+    width: 80%;
+    padding: 10px 5px;
+    float: left;
+    color: rgb(26, 26, 26);
+    border: 0;
+    background: transparent;
+    border-radius: 3px 0 0 3px;
+  }
+  .search input:focus {
+    outline: 0;
+    background: transparent;
+  }
+  .search button {
+    position: relative;
+    float: right;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    height: 40px;
+    width: 120px;
+    color: rgb(26, 26, 26);
+    background: transparent;
+    border-left: 1px solid rgb(0, 0, 0);
+    border-radius: 0 3px 3px 0;
+  }
+  .search button:hover {
+    border-bottom: 1px solid rgb(0, 0, 0);
+    background: rgb(150, 24, 24);
+    color: rgb(250, 250, 250);
+  }
+  .search button:active {
+    box-shadow: 0px 0px 12px 0px #e1e1e1;
+  }
+  .search button:focus {
+    outline: 0;
+  }
+
+/* FIN DU BLOC SUR LES SEARCHBARS */

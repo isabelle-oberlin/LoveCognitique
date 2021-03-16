@@ -7,7 +7,7 @@ $promo = getDb()->prepare('select * from Alumni where Promo=?');
 $promo->execute(array($eleveId));
 $eleve = $promo->fetch();*/
 
-$eleves = getDb()->query('SELECT * from Alumni'); 
+$eleves = getLocalDb()->query('SELECT * from Alumni'); 
 
 ?>
 
@@ -22,7 +22,7 @@ require_once "includes/head.php";
   
     <?php require_once "includes/header.php"; ?>
 
-    
+    <div class="container content">
     <div class="topnav" >
         <h3> Entrez une promo (année de sortie): </h3>
         <form action = "promotions.php" method = "POST">
@@ -37,11 +37,11 @@ require_once "includes/head.php";
     <?php if (empty($_POST['promo']) == false)
             {   
                 $annee = $_POST['promo'];
-                $eleves = getDb()->query('SELECT * from Alumni where promo= $annee'); 
+                $eleves = getLocalDb()->query('SELECT * from Alumni where promo= $annee'); 
             }
             ?>
 
-        <div class="container content">
+        
         <table class="table">
             <thead>
                 <tr>
