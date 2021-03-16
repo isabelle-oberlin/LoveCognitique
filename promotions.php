@@ -32,9 +32,12 @@ require_once "includes/head.php";
                 </tr>
             </thead>
             <tbody>
-            <?php foreach ($eleves as $eleve) { ?>
+            <?php foreach ($eleves as $eleve) { 
+                $i = 1;    
+            ?>
                 <tr>
-                <th scope="row">1</th>
+                
+                <th scope="row"><?php $i++; ?></th>
                     <td><?php $eleve['PrenomEleve'] ?></td>
                     <td><?php $eleve['NomEleve'] ?></td>
                 </tr>
