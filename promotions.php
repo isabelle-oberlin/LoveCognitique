@@ -37,9 +37,9 @@ require_once "includes/head.php";
             ?>
                 <tr>
                 
-                <th scope="row"><?php $i++; ?></th>
-                    <td><?php $eleve['PrenomEleve'] ?></td>
-                    <td><?php $eleve['NomEleve'] ?></td>
+                <th scope="row"><?= $i++; ?></th>
+                   <td><?= $eleve['PrenomEleve'] ?></td> 
+                    <td><?= $eleve['NomEleve'] ?></td>
                 </tr>
             <?php } ?>
             <tbody>
