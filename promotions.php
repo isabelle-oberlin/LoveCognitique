@@ -28,9 +28,9 @@ require_once "includes/head.php";
         <form action = "promotions.php" method = "POST">
        
         <div class="form-group" >
-            <i class="fas fa-user input-icon"></i>
+            
             <input class="form-control" type="text" name="promo" placeholder="Promo">
-            <i input id = "submit" class = "fas fa-search" type = "submit" value="Chercher">
+            <input id = "submit" class = "fas fa-search" type = "submit" value="Chercher">
         </div>
     </div> 
 
