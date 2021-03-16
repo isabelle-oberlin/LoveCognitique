@@ -25,10 +25,21 @@ require_once "includes/head.php";
     
     <div class="topnav" >
         <h3> Entrez une promo (année de sortie): </h3>
-        <form action = "promotions.php" method = "GET">
-        <input type="text" placeholder="Promo :)">
-        <i class="fas fa-search"></i>
+        <form action = "promotions.php" method = "POST">
+       
+        <div class="form-group" >
+            <i class="fas fa-user input-icon"></i>
+            <input class="form-control" type="text" name="promo" placeholder="Promo">
+            <i input id = "submit" class = "fas fa-search" type = "submit" value="Chercher">
+        </div>
     </div> 
+
+    <?php if (empty($_POST['promo']) == false)
+            {   
+                $annee = $_POST['promo'];
+                $eleves = getDb()->query('SELECT * from Alumni where promo= $annee'); 
+            }
+            ?>
 
         <div class="container content">
         <table class="table">
