@@ -66,7 +66,7 @@ if (!empty($_POST['mail']) and !empty($_POST['password'])) {
         </div>
 
     </br>
-<h3 class="text-center">Pas encore de compte ?  <u href = "creationcompte.php">Créez-en un ici </u></h3> 
+<h3 class="text-center">Pas encore de compte ?  <a href = "inscription.php">Créez-en un ici </a></h3> 
 </div>
 
 <?php include_once 'includes/footer.php'; ?>
