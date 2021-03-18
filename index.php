@@ -15,9 +15,15 @@
                 <p class="lead">Ceci est un joli site web avec un dégradé pour présenter l'annuaire des anciens</p>
                 <hr class="my-4">
                 <div class="topnav">
-                <form class="search" action="searchbar.php" method="GET">
-                    <input type="search" name="recherche" placeholder="Recherchez ici" required>
-                    <button type="submit">Search</button>
+                <form class="container" action="searchbar.php" method="GET">
+                    
+                    <div class="search">
+                        <input type="text" name="recherche" class="searchTerm" placeholder="Que cherchez-vous ?" required>
+                        <button type="submit" class="searchButton">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    
                 </form>   
                 </div>                
             </div>
