@@ -42,7 +42,6 @@ require_once "includes/head.php";
                 $eleves = getLocalDb()->query('SELECT * from Alumni where promo= $annee'); 
             }
             ?>
-
         
         <table class="table">
             <thead>
