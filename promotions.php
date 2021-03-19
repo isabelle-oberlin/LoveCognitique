@@ -25,14 +25,16 @@ require_once "includes/head.php";
     <div class="container content">
     <div class="topnav" >
         <h3> Entrez une promo (année de sortie): </h3>
-        <form action = "promotions.php" method = "POST">
-       
-        <div class="form-group" >
-            
-            <input class="form-control" type="text" name="promo" placeholder="Promo">
-            <input id = "submit" class = "fas fa-search" type = "submit" value="Chercher">
-        </div>
     </div> 
+
+    <form action = "promotions.php" method = "POST">
+        <div class="sb-example-1 row justify-content-center">
+            <div class="search">
+                <input type="text" class="searchTerm" name="recherche" placeholder="Entrez une année de promotion" required>
+                <button type="submit" class="searchButton"><i class="fa fa-search"></i></button>
+            </div>
+        </div>
+     </form>
 
     <?php if (empty($_POST['promo']) == false)
             {   
