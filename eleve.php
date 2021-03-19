@@ -3,6 +3,11 @@
             include_once 'includes/head.php';
             include_once 'includes/functions.php';
             session_start();
+
+            $IdAlumni = $_GET['id'];
+            $requete = getLocalDb()->prepare('select * from alumni where IdAlumni=?');
+            $requete->execute(array($IdAlumni));
+            $eleve = $requete->fetch();
         ?>
     <body>
         <?php
@@ -11,18 +16,13 @@
         <div class="content">
             <br/>
             <div class="Jumbotron container">
-                <h1 class="display-4">Inscription</h1>
+                <h1 class="display-4"><?= $eleve['PrenomEleve']," ",$eleve['NomEleve'] ?></h1>
                 
                 <hr class="my-4">
-                <?php if(isUserConnected() == false){ ?>
                 <div class="topnav">
-                <form class="container" action="searchbar.php" method="GET">
-                    
-                </div> 
-                <?php } else{ ?>
-                Vous êtes déjà inscrit.e ! 
-                <?php } ?>
+                  
 
+                </div>                
             </div>
         </div>
         <?php

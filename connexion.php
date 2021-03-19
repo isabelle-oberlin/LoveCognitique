@@ -31,43 +31,43 @@ if (!empty($_POST['mail']) and !empty($_POST['password'])) {
     <h2 class="text-center">Se connecter</h2>
     
     
-    </br>
+            </br>
 
-        <div class="row">
-            <div class="col-md-3 col-sm-1"> </div> 
-            <div class="col-md-6 col-sm-10"> 
-                <div class="form-container">
-                    <form class="form-horizontal" method = "POST" action = "connexion.php">
+                <div class="row">
+                    <div class="col-md-3 col-sm-1"> </div> 
+                    <div class="col-md-6 col-sm-10"> 
+                        <div class="form-container">
+                            <form class="form-horizontal" method = "POST" action = "connexion.php">
 
-                        <?php if (isset($error)) { ?>
-                            <div class="alert alert-danger">
-                                <strong>Erreur !</strong> <?= $error ?>
-                            </div>
-                        <?php } ?>
+                                <?php if (isset($error)) { ?>
+                                    <div class="alert alert-danger">
+                                        <strong>Erreur !</strong> <?= $error ?>
+                                    </div>
+                                <?php } ?>
 
-                        <div class="form-group" >
-                            <i class="fas fa-user input-icon"></i>
-                            <input class="form-control" name="mail" type="text" placeholder="Mail">
+                                <div class="form-group" >
+                                    <i class="fas fa-user input-icon"></i>
+                                    <input class="form-control" name="mail" type="text" placeholder="Mail">
+                                </div>
+                                <div class="form-group">
+                                    <i class="fas fa-lock  input-icon"></i>
+                                    <input class="form-control" name="password" type="password" placeholder="Mdp">
+                                </div>
+                                <button class="btn signin">Allons-y !</button>
+                                <div class="remember-me">
+                                    <input type="checkbox">
+                                    <label>Rester connecté</label>
+                                </div>
+                                <span class="forgot-pass">Vous avez oublié votre mot de passe? <a href="#"><u>Cliquez ici</u></a></span>
+                            </form>
                         </div>
-                        <div class="form-group">
-                            <i class="fas fa-lock  input-icon"></i>
-                            <input class="form-control" name="password" type="password" placeholder="Mdp">
-                        </div>
-                        <button class="btn signin">Allons-y !</button>
-                        <div class="remember-me">
-                            <input type="checkbox">
-                            <label>Rester connecté</label>
-                        </div>
-                        <span class="forgot-pass">Vous avez oublié votre mot de passe? <a href="#"><u>Cliquez ici</u></a></span>
-                    </form>
+                    </div> 
+                    <div class="col-md-3 col-sm-1"> </div> 
                 </div>
-             </div> 
-             <div class="col-md-3 col-sm-1"> </div> 
-        </div>
 
-    </br>
-<h3 class="text-center">Pas encore de compte ?  <a href = "inscription.php">Créez-en un ici </a></h3> 
-</div>
+            </br>
+        <h3 class="text-center">Pas encore de compte ?  <a href = "inscription.php">Créez-en un ici </a></h3> 
+    </div>
 
 <?php include_once 'includes/footer.php'; ?>
 </body>

@@ -29,7 +29,7 @@
 
                     foreach($results as $resultat)
                     {?>
-                    <p class="lead"><?= $resultat['PrenomEleve']," ",$resultat['NomEleve'] ?></p>
+                    <p class="lead"><a href="eleve.php?id=<?= $resultat['IdAlumni'] ?>"><?= $resultat['PrenomEleve']," ",$resultat['NomEleve'] ?></a></p>
                     <p>Promotion : <?= $resultat['Promo'] ?> <?php if($resultat['ConfiAdresse'] == 1){?> Commune: <?php print $resultat['NomCommune']; } ?></p>
                     <?php }
 

@@ -29,7 +29,7 @@ function getLocalDb() {
 
 // Check if a user is connected
 function isUserConnected() {
-    return isset($_SESSION['login']);
+    return isset($_SESSION['mail']);
 }
 
 // Redirect to a URL

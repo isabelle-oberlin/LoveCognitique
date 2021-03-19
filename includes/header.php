@@ -32,7 +32,7 @@
                 <?php if (isUserConnected()) { ?>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <span class="glyphicon glyphicon-user"></span> Bienvenue, <?= $_SESSION['login'] ?> <b class="caret"></b>
+                            <span class="glyphicon glyphicon-user"></span> Bienvenue, <?= $_SESSION['mail'] ?> <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="logout.php">Se déconnecter</a></li>
