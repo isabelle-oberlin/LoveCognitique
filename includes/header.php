@@ -34,8 +34,8 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <span class="glyphicon glyphicon-user"></span> Bienvenue, <?= $_SESSION['mail'] ?> <b class="caret"></b>
                         </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="logout.php">Se déconnecter</a></li>
+                        <ul class="dropdown">
+                            <li><a href="deconnexion.php">Se déconnecter</a></li>
                         </ul>
                     </li>
                 <?php } ?>

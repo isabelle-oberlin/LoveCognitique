@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="form-group">
                                     <i class="fas input-icon"></i>
-                                    <input class="form-control" name="Promo" type="number" placeholder="Promo">
+                                    <input class="form-control" name="Promo" type="text" placeholder="Année de sortie">
                                 </div>
                                 <div class="form-group">
                                     <i class="fas input-icon"></i>
