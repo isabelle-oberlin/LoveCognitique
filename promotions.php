@@ -2,13 +2,6 @@
 require_once "includes/functions.php";
 session_start();
 
-/*$eleveId = $_GET['Mail'];
-$promo = getDb()->prepare('select * from Alumni where Promo=?');
-$promo->execute(array($eleveId));
-$eleve = $promo->fetch();*/
-
-$eleves = getLocalDb()->query('SELECT * from Alumni'); 
-
 ?>
 
 
@@ -36,12 +29,18 @@ require_once "includes/head.php";
         </div>
      </form>
 
-    <?php if (empty($_POST['promo']) == false)
-            {   
-                $annee = $_POST['promo'];
-                $eleves = getLocalDb()->query('SELECT * from Alumni where promo= $annee'); 
-            }
-            ?>
+
+     <?php
+    $key = escape($_POST['recherche']);
+    $array = array();
+    //???? c'est quoi?
+
+    $bdd=getLocalDb();
+    $query= $bdd->prepare('select distinct * from Alumni where Promo = :thispromo');
+    $query->bindValue(':thispromo', "{$key}%");
+    $query->execute();
+    $eleves = $query->fetchAll();
+    ?>
         
         <table class="table">
             <thead>
