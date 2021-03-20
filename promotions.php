@@ -32,9 +32,6 @@ require_once "includes/head.php";
 
      <?php
     $key = escape($_POST['recherche']);
-    $array = array();
-    //???? c'est quoi?
-
     $bdd=getLocalDb();
     $query= $bdd->prepare('select distinct * from Alumni where Promo = :thispromo');
     $query->bindValue(':thispromo', "{$key}%");

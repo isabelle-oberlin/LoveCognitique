@@ -3,6 +3,36 @@
             include_once 'includes/head.php';
             include_once 'includes/functions.php';
             session_start();
+
+            //formulaire et création du compte. L'administrateur changera simplement le bool "validé"; 
+            //pour l'instant on peut créer un compte avec juste Nom, Promo, Mdp
+            if (!empty($_POST['Nom']) and !empty($_POST['Mot de passe']) and !empty($_POST['Promo']))
+            {
+                $bdd = getLocalDb();
+                //trouver l'id du nouveau compte
+                $query= $bdd->prepare('select max(IdAlumni) from Alumni');
+                $query->execute();
+                $new_id = $query->fetch();
+                //trouver l'id de la commune, pas accessible à l'élève qui s'inscrit
+                //fait changer le format. Demander le code postal par exemple
+                //$query= $bdd->prepare('select IdCommune from Commune where 'CodePostal = escape($_POST['AdressePostale'])');
+                //$idcommune=$query->fetch();
+
+                //FIXME le 42 à la place d'idcommune dans la requete
+                $stmt = $bdd->prepare('insert into Alumni (IdAlumni, NomEleve, PrenomEleve, Promo, AdressePostale, Mail, Mdp, Genre, Tel, Valide, IdCommune, IdGestionnaire) values (:IdAlumni, :NomEleve, :PrenomEleve, :Promo, :AdressePostale, :Mail, :Mdp, :Genre, :Tel, 0, 42, 0)');
+                $stmt->bindParam(':IdAlumni', $new_id);
+                $stmt->bindParam(':NomEleve', escape($_POST['IdAlumni']));
+                $stmt->bindParam(':PrenomEleve', escape($_POST['PrenomEleve']));
+                $stmt->bindParam(':Promo', escape($_POST['Promo']));
+                $stmt->bindParam(':AdressePostale', escape($_POST['AdressePostale']));
+                $stmt->bindParam(':Mail', escape($_POST['Mail']));
+                $stmt->bindParam(':Mdp', escape($_POST['Mdp']));
+                $stmt->bindParam(':Genre', escape($_POST['Genre']));
+                $stmt->bindParam(':Tel', escape($_POST['Tel']));
+                $stmt->execute();
+                $stmt->fetch();
+                //FIXME no errors caught, a print here does not work. But cannot create accounts
+            }
         ?>
     <body>
         <?php
