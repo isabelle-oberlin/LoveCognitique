@@ -13,6 +13,14 @@ if (!empty($_POST['mail']) and !empty($_POST['password'])) {
         redirect("index.php");
     }
     else {
+        $stmt = getLocalDb()->prepare('select * from gestionnaire where Mail=? and Mdp=?');
+        $stmt->execute(array($mail, $password));
+        if ($stmt->rowCount() == 1) {
+        // L'administrateur existe bien et s'est connecté
+        $_SESSION['mail'] = $mail;
+        redirect("admin/indexadmin.php");
+    }
+
         $error = "Utilisateur non reconnu";
     }
 }
