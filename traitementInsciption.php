@@ -21,7 +21,7 @@
                 //$idcommune=$query->fetch();
                 
                 //FIXME le 42 à la place d'idcommune dans la requete
-                $stmt = $bdd->prepare('insert into Alumni (IdAlumni, NomEleve, PrenomEleve, Promo, AdressePostale, Mail, Mdp, Genre, Tel, Valide, IdCommune, IdGestionnaire) values (:IdAlumni, :NomEleve, :PrenomEleve, :Promo, :AdressePostale, :Mail, :Mdp, :Genre, :Tel, 0, 1, 1)');
+              
                 $stmt = $bdd->prepare('insert into Alumni (IdAlumni, NomEleve, PrenomEleve, Promo, AdressePostale, Mail, Mdp, Genre, Tel, Valide, IdCommune, IdGestionnaire) values (:IdAlumni, :NomEleve, :PrenomEleve, :Promo, :AdressePostale, :Mail, :Mdp, :Genre, :Tel, 0, 1, 1)');
                 $stmt->bindValue(':IdAlumni', $new_id);
                 $stmt->bindValue(':NomEleve', escape($_POST['Nom']));
