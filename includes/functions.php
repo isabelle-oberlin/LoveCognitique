@@ -32,6 +32,24 @@ function isUserConnected() {
     return isset($_SESSION['mail']);
 }
 
+//check if an admin is connected
+function isAdminConnected() {
+    if(isUserConnected()){
+        $query = getLocalDb()->prepare('select * from gestionnaire where Mail=:mail');
+        $query->bindValue(':mail', $_SESSION['mail']);
+        $query->execute();
+        if ($query->rowCount() == 1) {
+            return isset($_SESSION['mail']);
+        }
+        else {
+            return false;
+        }
+    }
+    else{
+        return false;
+    }
+}
+
 // Redirect to a URL
 function redirect($url) {
     header("Location: $url");
