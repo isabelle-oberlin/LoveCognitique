@@ -26,15 +26,13 @@ $eleves = $query->fetchAll();
                     <p>Promotion : <?= $eleve['Promo'] ?></p> 
                     <p> Adresse: <?php print $eleve['AdressePostale'];  ?></p> 
                     <p>Mot de passe: <?= $eleve['Mdp'] ?> </p> 
+                    <form action = "validationrecup.php" method = "POST">
                     <button type="submit" id="valider" class="btn btn-secondary active" aria-pressed="true">Valider ce compte</button>
-
-                    <!-- si l'admin clique sur valider pour cet élève
-                    <?php if (isset($_POST["valider"])){
-                        $query= $bdd->prepare('update Alumni set Valide=1 WHERE Alumni.IdAlumni = :idalumni ');
-                        $query->bindValue(':name', "{$eleve['IdAlumni']}%");
-                        $query->execute();
-                        }?>
-                    
+                    </form>
+                    <!-- mettre un form pour le bouton et le traiter -->
+                    <!-- si l'admin clique sur valider pour cet élève-->
+                    <!--peut-être sortir ce test du foreach -->
+                  
                     <?php }
 
                   ?>
