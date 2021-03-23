@@ -15,9 +15,8 @@
                 $new_id = $query->fetch();
                 $new_id = $new_id['max(IdAlumni)'];
                 $new_id += 1;
-                //trouver l'id de la commune, pas accessible à l'élève qui s'inscrit
-                //fait changer le format. Demander le code postal par exemple
-                $cp = escape($_POST['Adresse']);
+   
+                $cp = escape($_POST['Code postal']);
                 $query= $bdd->prepare('select IdCommune from Commune where CodePostal= :cp');
                 $query->bindValue(':cp', $cp);
                 $query->execute();
