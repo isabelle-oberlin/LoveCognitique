@@ -28,7 +28,8 @@ $eleves = $query->fetchAll();
                     <p>Mot de passe: <?= $eleve['Mdp'] ?> </p> 
                     
                     <form action = "validationtraitement.php" method = "POST">
-                    <button type="submit" id="valider" class="btn btn-secondary active" aria-pressed="true">Valider ce compte</button>
+                      <input type="hidden" name="id" value="<?= $eleve['IdAlumni'] ?>">
+                      <button type="submit" id="valider" class="btn btn-secondary active" aria-pressed="true">Valider ce compte</button>
                     </form>
                     <!-- traitement-->
                     <?php }
