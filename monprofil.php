@@ -19,12 +19,12 @@
         <?php
             include_once 'includes/header.php';
         ?>
-        <div class="content">
-            <br/>
+        
             <?php if (!isAdminConnected())
             {?>
-
+            <div class=" content">
             <div class="Jumbotron container">
+                <br>
                 <h3 class="display-4"><?= $eleve['PrenomEleve']," ",$eleve['NomEleve'] ?></h3>
                 <p class="lead">Promo: <?= $eleve['Promo']?></p>
                 <p class="lead">Adresse: <?= $eleve['AdressePostale']?></p>
@@ -32,14 +32,19 @@
                 <p class="lead">Genre: <?= $eleve['Genre']?></p>
                 <hr class="my-2">
                 <p>Vous pouvez laisser votre numéro de téléphone ou votre mail en public, pour que les nouvelles générations vous demandent des conseils ;) Faites-leur profiter de votre expérience !</p>
-                </div>                
+                </div> 
+                </div>
             </div>
 
             <?php } else {?>
+            <br>
+            <div class=" content">
                 <div class="Jumbotron container">
                 <h3 class="display-4">Vous êtes administrateur, vous n'avez pas de profil particulier sur le site :)</h3>
+                </div>
+                </div>
             <?php } ?>
-        </div>
+        
         <?php
             include_once 'includes/footer.php';
         ?>

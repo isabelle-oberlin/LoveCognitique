@@ -59,8 +59,9 @@
                 <hr class="my-4">
                 <?php foreach($experiences as $experience){ ?>
                     <div class="exp">
+                        <span class="bold">
                         <?= $experience['TypeExp']," -" ?>
-                        <?= $experience['NomOrga'] ?><br>
+                        <?= $experience['NomOrga'] ?><br></span>
                         <?= "Du ",$experience['DateDebFr']," au ",$experience['DateFinFr'] ?> 
                         <br><br>
                         <?= $experience['Description'] ?>

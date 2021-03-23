@@ -24,7 +24,8 @@
                 $idcommune=$idcommune['IdCommune'];
                 
               
-                $stmt = $bdd->prepare('insert into Alumni (IdAlumni, NomEleve, PrenomEleve, Promo, AdressePostale, Mail, Mdp, Genre, Tel, Valide, IdCommune, IdGestionnaire) values (:IdAlumni, :NomEleve, :PrenomEleve, :Promo, :AdressePostale, :Mail, :Mdp, :Genre, :Tel, 0, :idCommune, 1)');
+                $stmt = $bdd->prepare('insert into Alumni (IdAlumni, NomEleve, PrenomEleve, Promo, AdressePostale, Mail, Mdp, Genre, Tel, Valide, IdCommune, IdGestionnaire) 
+                values (:IdAlumni, :NomEleve, :PrenomEleve, :Promo, :AdressePostale, :Mail, :Mdp, :Genre, :Tel, 0, :idCommune, 1)');
                 $stmt->bindValue(':IdAlumni', $new_id);
                 $stmt->bindValue(':NomEleve', escape($_POST['Nom']));
                 $stmt->bindValue(':PrenomEleve', escape($_POST['Prenom']));
@@ -37,6 +38,24 @@
                 $stmt->bindValue(':idCommune', $idcommune);
                 $stmt->execute();
                 $stmt->fetch();
+                
+                
+                
+                if($_POST['confiadresse']){$confiAdresse = 1;} else{$confiAdresse = 0;}
+                if($_POST['confimail']){$confiMail = 1;} else{$confiMail = 0;}
+                if($_POST['confitel']){$confiTel = 1;} else{$confiTel = 0;}
+                if($_POST['configenre']){$confiGenre = 1;} else{$confiGenre = 0;}
+                
+                $confidentialite = $bdd->prepare('insert into Confidentialite (IdConfidentialite, ConfiAdresse, ConfiMail, ConfiGenre, ConfiTel, IdAlumni) 
+                values (:IdConfidentialite, :ConfiAdresse, :ConfiMail, :ConfiGenre, :ConfiTel, :IdAlumni)');
+                $confidentialite->bindValue(':IdConfidentialite', $new_id);
+                $confidentialite->bindValue(':ConfiAdresse', $confiAdresse);
+                $confidentialite->bindValue(':ConfiMail', $confiMail);
+                $confidentialite->bindValue(':ConfiGenre', $confiGenre);
+                $confidentialite->bindValue(':ConfiTel', $confiTel);
+                $confidentialite->bindValue(':IdAlumni', $new_id);
+                $confidentialite->execute();
+                $confidentialite->fetch();
                 
             }
             redirect('index.php');

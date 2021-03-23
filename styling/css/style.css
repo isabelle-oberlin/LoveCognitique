@@ -34,15 +34,31 @@ body{
 
 div.exp{
     border: solid 1px rgba(216, 112, 147, 0.37);
-    
     border-radius: 1%;
     padding: 0% 1% 0% 1%;
 }
+
+span.bold{
+    font-weight: bold;
+}
+
+.borderline-pink{
+    border-left: 2px solid palevioletred;
+    margin-bottom: 1%;
+    padding: 0 1% 0 1%;
+}
+
+.borderline-clear{
+    padding: 0 1% 0 1%;
+}
+
+
 
 
 /* TOUT SUR LES FORMS (CONNEXION NOTAMMENT)*/
 .form-container{ font-family: 'Mukta', sans-serif; }
 .form-container .form-icon{
+    
     color : paleturquoise;
     font-size: 88px;
     text-align: center;
@@ -55,11 +71,13 @@ div.exp{
     border-radius: 50%;
 }
 .form-container .form-horizontal{
+    
     background: paleturquoise;
     padding: 35px 20px 5px;
     position: relative;
 }
 .form-container .form-horizontal:before{
+    
     content: '';
     background: linear-gradient(-45deg,transparent 49%, paleturquoise 50%);
     height: 30px;
@@ -77,6 +95,7 @@ div.exp{
 }
 .form-horizontal .form-group:nth-child(3){ margin-bottom: 40px; }
 .form-horizontal .input-icon{
+    
     color: rgb(37, 37, 37);
     background-color: palevioletred;
     font-size: 25px;
