@@ -33,11 +33,10 @@ body{
 }
 
 div.exp{
-    border: solid 1px palevioletred;
-    background-color: ghostwhite;
+    border: solid 1px rgba(216, 112, 147, 0.37);
+    
     border-radius: 1%;
     padding: 0% 1% 0% 1%;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 
