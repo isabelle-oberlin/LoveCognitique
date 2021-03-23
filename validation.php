@@ -20,20 +20,22 @@ $eleves = $query->fetchAll();
                 <h1 class="display-4">Comptes élèves en attente de validation </h1>
                 <hr class="my-4">
                   <?php
-                    foreach($eleves as $eleve)
-                    {?>
-                    <p class="lead"><a href="eleve.php?id=<?= $eleve['IdAlumni'] ?>"><?= $eleve['PrenomEleve']," ",$eleve['NomEleve'] ?></a></p>
-                    <p>Promotion : <?= $eleve['Promo'] ?></p> 
-                    <p> Adresse: <?php print $eleve['AdressePostale'];  ?></p> 
-                    <p>Mot de passe: <?= $eleve['Mdp'] ?> </p> 
-                    
-                    <form action = "validationtraitement.php" method = "POST">
-                      <input type="hidden" name="id" value="<?= $eleve['IdAlumni'] ?>">
-                      <button type="submit" id="valider" class="btn btn-secondary active" aria-pressed="true">Valider ce compte</button>
-                    </form>
-                    <!-- traitement-->
-                    <?php }
-
+                    if ($query->rowCount() != 0){
+                      foreach($eleves as $eleve)
+                      {?>
+                        <p class="lead"><a href="eleve.php?id=<?= $eleve['IdAlumni'] ?>"><?= $eleve['PrenomEleve']," ",$eleve['NomEleve'] ?></a></p>
+                        <p>Promotion : <?= $eleve['Promo'] ?></p> 
+                        <p> Adresse: <?php print $eleve['AdressePostale'];  ?></p> 
+                        <p>Mot de passe: <?= $eleve['Mdp'] ?> </p> 
+                      
+                        <form action = "validationtraitement.php" method = "POST">
+                          <input type="hidden" name="id" value="<?= $eleve['IdAlumni'] ?>">
+                          <button type="submit" id="valider" class="btn btn-secondary active" aria-pressed="true">Valider ce compte</button>
+                        </form>
+                        <!-- traitement-->
+                  <?php }
+                    }
+                    else{ echo "<p>Il n'y a pas d'élèves en attente de validation. Allez prendre un café ou un thé.</p>";}
                   ?>
                 </div>                
             </div>

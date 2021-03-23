@@ -19,7 +19,7 @@
                     
                 Vous recherchez un.e :
                 <label for="Eleve">
-                    <input type="radio" name="searchType" value="eleve" >
+                    <input type="radio" name="searchType" value="eleve" checked>
                         Elève</label>
                     <label for="secteur">
                         <input type="radio" name="searchType" value="secteur"> Expérience par secteur

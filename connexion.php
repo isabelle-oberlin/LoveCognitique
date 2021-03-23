@@ -20,7 +20,6 @@ if (!empty($_POST['mail']) and !empty($_POST['password'])) {
         $_SESSION['mail'] = $mail;
         redirect("indexadmin.php");
     }
-
         $error = "Utilisateur non reconnu";
     }
 }
