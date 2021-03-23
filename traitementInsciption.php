@@ -17,12 +17,15 @@
                 $new_id += 1;
                 //trouver l'id de la commune, pas accessible à l'élève qui s'inscrit
                 //fait changer le format. Demander le code postal par exemple
-                //$query= $bdd->prepare('select IdCommune from Commune where 'CodePostal = escape($_POST['AdressePostale'])');
-                //$idcommune=$query->fetch();
+                $cp = escape($_POST['Adresse']);
+                $query= $bdd->prepare('select IdCommune from Commune where CodePostal= :cp');
+                $query->bindValue(':cp', $cp);
+                $query->execute();
+                $idcommune=$query->fetch();
+                $idcommune=$idcommune['IdCommune'];
                 
-                //FIXME le 42 à la place d'idcommune dans la requete
               
-                $stmt = $bdd->prepare('insert into Alumni (IdAlumni, NomEleve, PrenomEleve, Promo, AdressePostale, Mail, Mdp, Genre, Tel, Valide, IdCommune, IdGestionnaire) values (:IdAlumni, :NomEleve, :PrenomEleve, :Promo, :AdressePostale, :Mail, :Mdp, :Genre, :Tel, 0, 1, 1)');
+                $stmt = $bdd->prepare('insert into Alumni (IdAlumni, NomEleve, PrenomEleve, Promo, AdressePostale, Mail, Mdp, Genre, Tel, Valide, IdCommune, IdGestionnaire) values (:IdAlumni, :NomEleve, :PrenomEleve, :Promo, :AdressePostale, :Mail, :Mdp, :Genre, :Tel, 0, :idCommune, 1)');
                 $stmt->bindValue(':IdAlumni', $new_id);
                 $stmt->bindValue(':NomEleve', escape($_POST['Nom']));
                 $stmt->bindValue(':PrenomEleve', escape($_POST['Prenom']));
@@ -32,6 +35,7 @@
                 $stmt->bindValue(':Mdp', escape($_POST['motdepasse']));
                 $stmt->bindValue(':Genre', escape($_POST['genre']));
                 $stmt->bindValue(':Tel', escape($_POST['Tel']));
+                $stmt->bindValue(':idCommune', $idcommune);
                 $stmt->execute();
                 $stmt->fetch();
                 

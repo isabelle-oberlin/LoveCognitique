@@ -15,7 +15,7 @@
                 <h1 class="display-4">Inscription</h1>
                 
                 <hr class="my-4">
-                <?php if(isUserConnected() == false){ ?>
+                <?php if(isUserConnected() == false || isAdminConnected() == true){ ?>
                     <div class="form-container">
                             <form class="form-horizontal" method ="POST" action ="traitementInsciption.php">
 
