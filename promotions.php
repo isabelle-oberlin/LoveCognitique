@@ -29,7 +29,6 @@ require_once "includes/head.php";
         </div>
      </form>
 
-
      <?php
     $key = escape($_POST['recherche']);
     $bdd=getLocalDb();

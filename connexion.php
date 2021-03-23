@@ -10,7 +10,7 @@ if (!empty($_POST['mail']) and !empty($_POST['password'])) {
     if ($stmt->rowCount() == 1) {
         // L'utilisateur existe bien et s'est connecté
         $_SESSION['mail'] = $mail;
-        redirect("index.php");
+        redirect('index.php');
     }
     else {
         $stmt = getLocalDb()->prepare('select * from gestionnaire where Mail=? and Mdp=?');
