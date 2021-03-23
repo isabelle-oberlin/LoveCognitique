@@ -16,8 +16,8 @@
                 $new_id = $new_id['max(IdAlumni)'];
                 $new_id += 1;
    
-                $cp = escape($_POST['Code postal']);
-                $query= $bdd->prepare('select IdCommune from Commune where CodePostal= :cp');
+                $cp = escape($_POST['cp']);
+                $query= $bdd->prepare('select IdCommune from commune where CodePostal= :cp');
                 $query->bindValue(':cp', $cp);
                 $query->execute();
                 $idcommune=$query->fetch();

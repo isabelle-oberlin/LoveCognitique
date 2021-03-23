@@ -43,7 +43,7 @@
                                 </div>
                                 <div class="form-group">
                                     <i class="fas input-icon"></i>
-                                <input class="form-control" name="Code postal" type="text" placeholder="Code Postal">
+                                <input class="form-control" name="cp" type="text" placeholder="Code Postal">
                                 </div>
                                 <div class="form-group">
                                     <i class="fas input-icon"></i>

@@ -32,6 +32,14 @@ body{
     justify-content: center;
 }
 
+div.exp{
+    border: solid 1px palevioletred;
+    background-color: ghostwhite;
+    border-radius: 1%;
+    padding: 0% 1% 0% 1%;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
 
 /* TOUT SUR LES FORMS (CONNEXION NOTAMMENT)*/
 .form-container{ font-family: 'Mukta', sans-serif; }
