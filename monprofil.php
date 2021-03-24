@@ -3,9 +3,9 @@
             include_once 'includes/head.php';
             include_once 'includes/functions.php';
             session_start();
-
+            //FIXME est ce que l'admin a le droit de modifier le profil d'un élève ?
             //cas admin
-            if (!isAdminConnected())
+            if (!isAdminConnected() && isUserConnected())
             {
                 $mailAlumni = $_SESSION['mail']; 
                 $requete = getLocalDb()->prepare('select * from Alumni where mail =:mailA');
@@ -29,7 +29,7 @@
             include_once 'includes/header.php';
         ?>
         
-            <?php if (!isAdminConnected() || !isUserConnected())
+            <?php if (!isAdminConnected() && isUserConnected())
             {?>
         <br>
             <div class=" content">
@@ -101,7 +101,7 @@
                             </form>
                     </div>
                 </div>
-                <hr class="my-2">
+                <hr class="my-3">
                 <?php foreach($experiences as $experience){ ?>
                     <div class="exp">
                         <span class="bold">
@@ -122,8 +122,9 @@
                         <br>
                         <div id="<?= "suppr",$experience['IdExp'] ?>" class="collapse in align-bottom">
                             <form>
-                                <input type="hidden" name="id" value="<?= $experience['IdExp'] ?>">
+                                <input type="hidden" name="id" value="<?= $experience['IdExp'] ?>"><br>
                                 <button type="submit" class="btn btn-danger">Suppirmer définitivement</button>
+                                <br><br>
                             </form>
                         </div>
                     </div>
