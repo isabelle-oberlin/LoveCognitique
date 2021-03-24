@@ -37,11 +37,25 @@
                 <h3 class="display-4"><?= $eleve['PrenomEleve']," ",$eleve['NomEleve'] ?></h3>
                 <hr class="my-4">
                 
-                Promotion : <?= $eleve['Promo'] ?><br>
-                Commune : <?= $commune['NomCommune'], ", ", $commune['Pays'] ?><br>
-                Mail : <?= $eleve['Mail'] ?><br>
-                Téléphone : +33<?= $eleve['Tel'] ?><br>
-                Genre : <?= $eleve['Genre'] ?>
+                <b>Promotion : <?= $eleve['Promo'] ?><br></b>
+             
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="conficommune" name="conficommune">
+                    <label class="custom-control-label" for="configenre">Rendre ma commune visible à tous les élèves</label>
+                </div>
+                <b>Commune : <?= $commune['NomCommune'], ", ", $commune['Pays'] ?></b><br>
+                
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="confimail" name="confimail">
+                    <label class="custom-control-label" for="configenre">Rendre mon mail visible à tous les élèves</label>
+                </div>
+                <b>Mail : <?= $eleve['Mail'] ?><br></b>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="confitel" name="confitel">
+                    <label class="custom-control-label" for="configenre">Rendre mon numéro visible à tous les élèves</label>
+                </div>
+                <b>Téléphone : +33<?= $eleve['Tel'] ?></b><br>
+                <b>Genre : <?= $eleve['Genre'] ?></b>
                         
                 <hr class="my-2">
                 <p>Vous pouvez laisser votre numéro de téléphone ou votre mail en public, pour que les nouvelles générations vous demandent des conseils ;) Faites-leur profiter de votre expérience !</p>

@@ -37,19 +37,19 @@
                         Promotion : <?= $eleve['Promo'] ?>
                         <br>
 
-                        <?php if($confidentialite['ConfiAdresse']){ ?>
+                        <?php if($confidentialite['ConfiAdresse'] || isAdminConnected()){ ?>
                         Commune : <?= $commune['NomCommune'],", ",$commune['Pays'] ?>
                         <?php } ?>
 
-                        <?php if($confidentialite['ConfiMail']){ ?>
+                        <?php if($confidentialite['ConfiMail']|| isAdminConnected()){ ?>
                         Mail : <?= $eleve['Mail'] ?>
                         <?php } ?><br>
 
-                        <?php if($confidentialite['ConfiTel']){ ?>
+                        <?php if($confidentialite['ConfiTel']|| isAdminConnected()){ ?>
                         Téléphone : +33<?= $eleve['Tel'] ?>
                         <?php } ?><br>
 
-                        <?php if($confidentialite['ConfiGenre']){ ?>
+                        <?php if($confidentialite['ConfiGenre']|| isAdminConnected()){ ?>
                         Genre : <?= $eleve['Genre'] ?>
                         <?php } ?><br>
                 </div>    
