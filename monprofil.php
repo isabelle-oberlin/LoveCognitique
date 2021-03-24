@@ -76,6 +76,7 @@
                                 <?php } ?>
                                            
                                 <input type="hidden" name="action" value="ajouter">
+                                <input type="hidden" name="IdAlumni" value="<?= $eleve['IdAlumni'] ?>"
                                 
                                 <div class="h5" >
                                     <label for="type">Type d'expérience : </label>
@@ -114,7 +115,7 @@
                                 
                             </form>
                     </div>
-                </div>
+                
                 <hr class="my-3">
                 <?php foreach($experiences as $experience){ ?>
                     <div class="exp">
@@ -135,7 +136,8 @@
                         <?= $experience['Description'] ?>
                         <br>
                         <div id="<?= "suppr",$experience['IdExp'] ?>" class="collapse in align-bottom">
-                            <form>
+                            <form method ="POST" action ="traitementProfil.php">
+                                <input type="hidden" name="action" value="update_exp">
                                 <input type="hidden" name="id" value="<?= $experience['IdExp'] ?>"><br>
                                 <button type="submit" class="btn btn-danger">Supprimer définitivement</button>
                                 <br><br>
