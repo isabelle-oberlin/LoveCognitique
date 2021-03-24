@@ -1,5 +1,7 @@
 <?php
     include_once 'includes/functions.php';
+   
+    
     $key = escape($_GET['recherche']);
     $array = array();
     $bdd=getLocalDb();
@@ -11,6 +13,7 @@
     $query->bindValue(':commune', "{$key}%");
     $query->execute();
     $results = $query->fetchAll();
+     
 ?>
 
 <html>

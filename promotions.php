@@ -30,12 +30,21 @@ require_once "includes/head.php";
      </form>
 
      <?php
-    $key = escape($_POST['recherche']);
+     //éviter l'erreur d'index indéfini quand l'utilisateur n'a pas encore tapé dans la barre de recherche
+    if (empty($_GET['recherche']) == false)
+    {
+    $key = escape($_GET['recherche']);
+    }
+    else 
+    {
+        $key = 1; //se garantir un affichage vide, mais l'index est défini.
+    }
     $bdd=getLocalDb();
     $query= $bdd->prepare('select distinct * from Alumni where Promo = :thispromo');
     $query->bindValue(':thispromo', "{$key}%");
     $query->execute();
     $eleves = $query->fetchAll();
+  
     ?>
         
         <table class="table">
