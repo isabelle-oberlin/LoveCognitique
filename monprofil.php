@@ -56,14 +56,83 @@
                 </div>
                 <b>Téléphone : +33<?= $eleve['Tel'] ?></b><br>
                 <b>Genre : <?= $eleve['Genre'] ?></b>
-                        
+
+                 
                 <hr class="my-2">
                 <p>Vous pouvez laisser votre numéro de téléphone ou votre mail en public, pour que les nouvelles générations vous demandent des conseils ;) Faites-leur profiter de votre expérience !</p>
-                <hr class="my-2">
+              
+              
+              <!-- MODIFICATION POSSIBLE PAR L UTILISATEUR: -->    
+
+              <a type="button" class="align-self-center" data-toggle="collapse" data-target="#<?= "modifier",$eleve['IdAlumni'] ?>" title='Modifier'> <span class="btn btn-secondary active">Modifier mon profil</span></a>
+                <div id="<?= "modifier", $eleve['IdAlumni'] ?>"class="collapse in">
+                    <div class="form-container">
+                        <form class="form-horizontal" method ="POST" action ="traitementProfil.php">
+                            <?php if (isset($error)) { ?>
+                            <div class="alert alert-danger">
+                                 <strong>Erreur !</strong> <?= $error ?>
+                            </div>
+                            <?php } ?>
+
+                                         <!-- COMMENT CA MARCHE CES DEUX LIGNES??-->  
+                        <input type="hidden" name="action" value="update">
+                        <input type="hidden" name="id" value="<?= $eleve['IdAlumni'] ?>">
+                     
+                        
+                        <fieldset class="borderline-clear">
+                                <div class="form-group" >
+                                    <i class="fas input-icon"></i>
+                                    <input class="form-control" name="Nom" type="text" value = "<?php echo $eleve['NomEleve'] ?>" required>
+                                </div>
+                                <div class="form-group">
+                                    <i class="fas input-icon"></i>
+                                    <input class="form-control" name="Prenom" type="text" placeholder="Prenom" value = "<?php echo $eleve['PrenomEleve'] ?>" required> 
+                                </div>
+                                <div class="form-group">
+                                    <i class="fas input-icon"></i>
+                                    <input class="form-control" name="Promo" type="text" placeholder="Année de sortie" value = "<?php echo $eleve['Promo'] ?>" required>
+                                </div>   
+                                    
+                                <div class="form-group">
+                                    <i class="fas input-icon"></i>
+                                <input class="form-control" name="Adresse" type="text" placeholder="Adresse" value = "<?php echo $eleve['AdressePostale'] ?>" >
+                                </div>
+                                
+                                <div class="form-group">
+                                    <i class="fas input-icon"></i>
+                                    <input class="form-control" name="Mail" type="mail" placeholder="Mail" value = "<?php echo $eleve['Mail'] ?>" required>
+                                </div> 
+                                
+                                <div class="form-group">
+                                    <i class="fas input-icon"></i>
+                                    <input class="form-control" name="motdepasse" type="password" placeholder="Mot de passe" value = "<?php echo $eleve['Mdp'] ?>" required>
+                                </div>
+                            
+                                <div class="form-group">
+                                    <i class="fas input-icon"></i>
+                                    <input class="form-control" name="Tel" type="text" placeholder="Tel" value = "<?php echo $eleve['Tel'] ?>" >
+                                </div>  
+                               
+                                <div class="form-group">
+                                    <input type="radio" name="genre" value="H" <?php if ($eleve['Genre'] == 'H') { echo 'checked'; } ?> > Homme 
+                                    <input type="radio" name="genre" value="F" <?php if ($eleve['Genre'] == 'F') { echo 'checked'; } ?>> Femme 
+                                    <input type="radio" name="genre" value="NB" <?php if ($eleve['Genre'] == 'H') { echo 'checked'; } ?>> NB   
+                                </div>
+                                
+                                <button type="submit" class="btn signin">Allons-y !</button>
+                            
+                            </form>
+                    
+                    </div>
+
+                </div>
+
+               
+              
+                
                 
                 <div>
-                    <h2> <span class="display-4">Expériences   </span> <a type="button" class="align-self-center" data-toggle="collapse" data-target="#add" title='Ajouter une expérience'><i class="fas fa-plus-circle"></i></a></h2> 
-                
+                   <h2> <span class="display-4">Expériences</span> <a type="button" class="align-self-center" data-toggle="collapse" data-target="#add" title='Ajouter une expérience'><i class="fas fa-plus-circle"></i></a></h2> 
                 </div>
                 <div id="add" class="collapse in">
                     <div class="form-container">
@@ -196,7 +265,7 @@
                         </div>
                     </div>
                     
-                    <hr class="my-4">              
+                                
                 <?php } ?>
                 </div> 
                 </div>
