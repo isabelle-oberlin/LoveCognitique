@@ -15,8 +15,8 @@
                 <p class="lead">Ceci est un joli site web avec un dégradé pour présenter l'annuaire des anciens</p>
                 <hr class="my-4">
                 <div class="topnav">
+
                 <form class="container" action="searchbar.php" method="GET">
-                    
                 Vous recherchez un.e :
                 <label for="Eleve">
                     <input type="radio" name="searchType" value="eleve" checked>
