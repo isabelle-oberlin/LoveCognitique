@@ -17,7 +17,7 @@
                 <hr class="my-4">
                 <?php if(isUserConnected() == false || isAdminConnected() == true){ ?>
                     <div class="form-container">
-                            <form class="form-horizontal" method ="POST" action ="traitementInsciption.php">
+                            <form class="form-horizontal" method ="POST" action ="traitementInscription.php">
 
                                 <?php if (isset($error)) { ?>
                                     <div class="alert alert-danger">

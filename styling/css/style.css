@@ -52,8 +52,13 @@ span.bold{
     padding: 0 1% 0 1%;
 }
 
+textarea {
+  resize: none;
+}
 
-
+form{
+    margin-bottom: 2px;
+}
 
 /* TOUT SUR LES FORMS (CONNEXION NOTAMMENT)*/
 .form-container{ font-family: 'Mukta', sans-serif; }
@@ -92,6 +97,8 @@ span.bold{
     margin: 0 0 15px;
     border-radius: 10px;
     overflow: hidden;
+    max-height: 30%; 
+        
 }
 .form-horizontal .form-group:nth-child(3){ margin-bottom: 40px; }
 .form-horizontal .input-icon{
@@ -106,13 +113,27 @@ span.bold{
     vertical-align: top;
     display: inline-block;
 }
+
+.input-icon-textarea{
+    color: rgb(37, 37, 37);
+    background-color: palevioletred;
+    font-size: 25px;
+    text-align: center;
+    line-height: 51px;
+    height: 100%;
+    width: 55px;
+    vertical-align: top;
+    display: inline-block;
+}
+
 .form-horizontal .form-control{
     color: #555;
     background-color: transparent;
     font-size: 18px;
     letter-spacing: 1px;
     width: calc(100% - 60px);
-    height: 50px;
+    min-height: 50px;
+    max-height: inherit;
     padding: 10px;
     box-shadow: none;
     border: none;

@@ -18,6 +18,7 @@ if (!empty($_POST['mail']) and !empty($_POST['password'])) {
         if ($stmt->rowCount() == 1) {
         // L'administrateur existe bien et s'est connecté
         $_SESSION['mail'] = $mail;
+        $_SESSION['status'] = "admin";
         redirect("indexadmin.php");
     }
         $error = "Utilisateur non reconnu";
