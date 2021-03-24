@@ -35,25 +35,26 @@
                 <div class="justify-content-center">
                     <!-- passer en lien vers la promo -->
                         Promotion : <?= $eleve['Promo'] ?>
-                        <br>
+                        </br>
 
                         <?php if($confidentialite['ConfiAdresse'] || isAdminConnected()){ ?>
                         Commune : <?= $commune['NomCommune'],", ",$commune['Pays'] ?>
                         <?php } ?>
+                        </br>
 
                         <?php if($confidentialite['ConfiMail']|| isAdminConnected()){ ?>
                         Mail : <?= $eleve['Mail'] ?>
-                        <?php } ?><br>
+                        <?php } ?></br>
 
                         <?php if($confidentialite['ConfiTel']|| isAdminConnected()){ ?>
                         Téléphone : +33<?= $eleve['Tel'] ?>
-                        <?php } ?><br>
+                        <?php } ?></br>
 
                         <?php if($confidentialite['ConfiGenre']|| isAdminConnected()){ ?>
                         Genre : <?= $eleve['Genre'] ?>
-                        <?php } ?><br>
+                        <?php } ?></br>
                 </div>    
-                <br>
+                </br>
 
                 <h1 class="display-4">Expériences</h1>
                 <hr class="my-4">

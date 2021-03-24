@@ -22,10 +22,13 @@
                     <input type="radio" name="searchType" value="eleve" checked>
                         Elève</label>
                     <label for="secteur">
-                        <input type="radio" name="searchType" value="secteur"> Expérience par secteur
+                        <input type="radio" name="searchType" value="secteur"> Expérience par secteur d'activités
                     </label>
-                    <label for="poste">
-                        <input type="radio" name="searchType" value="secteur"> Expérience par secteur
+                    <label for="type">
+                        <input type="radio" name="searchType" value="type"> Type de poste
+                    </label>
+                    <label for="region">
+                        <input type="radio" name="searchType" value="region"> Région
                     </label>
                 </div>
                 

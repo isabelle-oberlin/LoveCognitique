@@ -137,7 +137,7 @@
                         <div id="<?= "suppr",$experience['IdExp'] ?>" class="collapse in align-bottom">
                             <form>
                                 <input type="hidden" name="id" value="<?= $experience['IdExp'] ?>"><br>
-                                <button type="submit" class="btn btn-danger">Suppirmer définitivement</button>
+                                <button type="submit" class="btn btn-danger">Supprimer définitivement</button>
                                 <br><br>
                             </form>
                         </div>
