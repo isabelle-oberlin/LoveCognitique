@@ -15,14 +15,15 @@
                 $new_id = $query->fetch();
                 $new_id = $new_id['max(IdAlumni)'];
                 $new_id += 1;
-   
-                $cp = escape($_POST['cp']);
-                $query= $bdd->prepare('select IdCommune from commune where CodePostal= :cp');
-                $query->bindValue(':cp', $cp);
+
+
+                $query= $bdd->prepare('select IdCommune from Commune where NomCommune= :ville');
+                $query->bindValue(':ville', $_POST['Ville']);
                 $query->execute();
                 $idcommune=$query->fetch();
                 $idcommune=$idcommune['IdCommune'];
-                
+
+
               
                 $stmt = $bdd->prepare('insert into Alumni (IdAlumni, NomEleve, PrenomEleve, Promo, Ville, Région, Pays, Mail, Mdp, Genre, Tel, Valide, IdCommune, IdGestionnaire) 
                 values (:IdAlumni, :NomEleve, :PrenomEleve, :Promo, :Ville, :Région, :Pays, :Mail, :Mdp, :Genre, :Tel, 0, :idCommune, 1)');
@@ -31,7 +32,7 @@
                 $stmt->bindValue(':PrenomEleve', escape($_POST['Prenom']));
                 $stmt->bindValue(':Promo', escape($_POST['Promo']));
                 $stmt->bindValue(':Ville', escape($_POST['Ville']));
-                $stmt->bindValue(':Région', escape($_POST['Région']));
+                $stmt->bindValue(':Région', escape($_POST['Region']));
                 $stmt->bindValue(':Pays', escape($_POST['Pays']));
                 $stmt->bindValue(':Mail', escape($_POST['Mail']));
                 $stmt->bindValue(':Mdp', escape($_POST['motdepasse']));
@@ -40,7 +41,6 @@
                 $stmt->bindValue(':idCommune', $idcommune);
                 $stmt->execute();
                 $stmt->fetch();
-                
                 
                 
                 if($_POST['confiadresse']){$confiAdresse = 1;} else{$confiAdresse = 0;}

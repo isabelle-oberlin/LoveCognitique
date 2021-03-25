@@ -49,7 +49,7 @@
                                 </div>
                                 <div class="form-group">
                                     <i class="fas input-icon"></i>
-                                <input class="form-control" name="Region" type="text" placeholder="Région">
+                                <input class="form-control" name="Region" type="text" placeholder="Region">
                                 </div>
                                 <div class="form-group">
                                     <i class="fas input-icon"></i>

@@ -105,19 +105,17 @@
                                 </div>
                                 <div class="form-group">
                                     <i class="fas input-icon"></i>
-                                <input class="form-control" name="Adresse" type="text" placeholder="Adresse" value="<?= $eleve['AdressePostale'] ?>">
+                                <input class="form-control" name="Ville" type="text" placeholder="Ville" value="<?= $eleve['Ville'] ?>">
                                 </div>
-                                
                                 <div class="form-group">
                                     <i class="fas input-icon"></i>
-                                <input class="form-control" name="cp" type="text" placeholder="Code Postal" value="FIXME">
+                                <input class="form-control" name="Region" type="text" placeholder="Region" value="<?= $eleve['Region'] ?>">
+                                </div> 
+                                <div class="form-group">
+                                    <i class="fas input-icon"></i>
+                                <input class="form-control" name="Pays" type="text" placeholder="Pays" value="<?= $eleve['Pays'] ?>">
                                 </div>
                                
-                                <div class="form-group">
-                                    <i class="fas input-icon"></i>
-                                <input class="form-control" name="Pays" type="text" placeholder="Pays">
-                                </div>
-                                
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" id="confimail" name="confimail" <?php if ($confi['ConfiMail']!=0) { echo 'checked'; } ?>>
                                     <label class="custom-control-label" for="confimail">Rendre cette information visible à tous les éléves</label>
@@ -167,7 +165,7 @@
                 <div>
                    <h2> <span class="display-4">Expériences</span> <a type="button" class="align-self-center" data-toggle="collapse" data-target="#add" title='Ajouter une expérience'><i class="fas fa-plus-circle"></i></a></h2> 
                 </div>
-                <div id="add" class="collapse in">
+              
                             <!-- AJOUT EXP -->
                     <div class="form-container">
                             <form class="form-horizontal" method ="POST" action ="traitementProfil.php">
