@@ -62,11 +62,8 @@ if (!empty($_POST['mail']) and !empty($_POST['password'])) {
                                     <input class="form-control" name="password" type="password" placeholder="Mdp">
                                 </div>
                                 <button class="btn signin">Allons-y !</button>
-                                <div class="remember-me">
-                                    <input type="checkbox">
-                                    <label>Rester connecté</label>
-                                </div>
-                                <span class="forgot-pass">Vous avez oublié votre mot de passe? <a href="#"><u>Cliquez ici</u></a></span>
+                                
+                                <span class="forgot-pass">L'annuaire des Anicens de l'ENSC. L'INDISPENSABLE du cogniticien</span>
                             </form>
                         </div>
                     </div> 

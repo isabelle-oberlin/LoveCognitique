@@ -98,6 +98,17 @@
                                     <input class="form-control" name="Promo" type="text" placeholder="Année de sortie" value="<?= $eleve['Promo'] ?>" required>
                                 </div>
                                     
+                        <div class="select">
+                            <select name="slct" id="slct" placeholder="Pays">
+                              <option selected disabled>Pays</option>
+                              <option value="1">Pure CSS</option>
+                              <option value="2">No JS</option>
+                              <option value="3">Nice!</option>
+                            </select>
+                        </div>
+                        <div id="Ajoutertruc" class="collapse in">
+                            C4ESTBON
+                        </div>
                               
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" id="confiadresse" name="confiadresse" <?php if ($confi['ConfiAdresse']!=0) { echo 'checked'; } ?> >
@@ -105,19 +116,19 @@
                                 </div>
                                 <div class="form-group">
                                     <i class="fas input-icon"></i>
-                                <input class="form-control" name="Ville" type="text" placeholder="Ville" value="<?= $eleve['Ville'] ?>">
+                                <input class="form-control" name="Ville" type="text" placeholder="Ville" value="<?= $commune['NomCommune'] ?>">
                                 </div>
                                 <div class="form-group">
                                     <i class="fas input-icon"></i>
-                                <input class="form-control" name="Region" type="text" placeholder="Region" value="<?= $eleve['Region'] ?>">
+                                <input class="form-control" name="Region" type="text" placeholder="Region" value="<?= $commune['Region'] ?>">
                                 </div> 
                                 <div class="form-group">
                                     <i class="fas input-icon"></i>
-                                <input class="form-control" name="Pays" type="text" placeholder="Pays" value="<?= $eleve['Pays'] ?>">
+                                <input class="form-control" name="Pays" type="text" placeholder="Pays" value="<?= $commune['Pays'] ?>">
                                 </div>
                                
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="confimail" name="confimail" <?php if ($confi['ConfiMail']!=0) { echo 'checked'; } ?>>
+                                    <input type="checkbox" class="custom-control-input" id="confimail" name="confimail" <?php if ($confi['ConfiMail']!=0) { echo 'checked'; } ?> >
                                     <label class="custom-control-label" for="confimail">Rendre cette information visible à tous les éléves</label>
                                 </div>
                                 <div class="form-group">
@@ -131,7 +142,7 @@
                                 </div>
  
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="confitel" name="confitel" <?php if ($confi['ConfiTel']!=0) { echo 'checked'; } ?>>
+                                    <input type="checkbox" class="custom-control-input" id="confitel" name="confitel" <?php if ($confi['ConfiTel']!=0) { echo 'checked'; } ?> >
                                     <label class="custom-control-label" for="confitel">Rendre cette information visible à tous les éléves</label>
                                 </div>
                                 <div class="form-group">
@@ -140,7 +151,7 @@
                                 </div>
 
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="configenre" name="configenre" <?php if ($confi['ConfiGenre']!=0) { echo 'checked'; } ?>>
+                                    <input type="checkbox" class="custom-control-input" id="configenre" name="configenre" <?php if ($confi['ConfiGenre']!=0) { echo 'checked'; } ?> >
                                     <label class="custom-control-label" for="configenre">Rendre cette information visible à tous les éléves</label>
                                 </div>
                                 <div class="" >
@@ -167,7 +178,7 @@
                 </div>
               
                             <!-- AJOUT EXP -->
-                    <div class="form-container">
+                    <div id="add" class="form-container collapse in">
                             <form class="form-horizontal" method ="POST" action ="traitementProfil.php">
 
                                 <?php if (isset($error)) { ?>
@@ -203,27 +214,32 @@
                                     <input class="form-control" name="salaire" type="number" placeholder="Salaire : Laisser vide si non rémunéré" min="0">
                                 </div>                                 
                                 
-                                <div class="form-group">
-                                    <i class="fas input-icon"></i>
-                                    <input class="form-control" name="datedeb" type="date" required>
-                                </div>
-                                <div class="form-group">
-                                    <i class="fas input-icon"></i>
-                                <input class="form-control" name="datefin" type="date">
-                                </div>                           
+                                
+                                    <label for="datedeb"> Date de début </label>
+                                    <div class="form-group">
+                                        <i class="fas input-icon"></i>
+                                        <input class="form-control" name="datedeb" placeholder="Pipou" type="date" required>
+                                    </div>
+                                
+                                    <label for="datedeb"> Date de fin </label>
+                                    <div class="form-group">
+                                        <i class="fas input-icon"></i>
+                                    <input class="form-control" name="datefin" type="date">
+                                    </div> 
+                                
                                                                 
                                 <button type="submit" class="btn signin">Allons-y !</button>
                                 
                             </form>
                     </div>
-                </div>
+                
                 <hr class="my-3">
                 <!-- AFFICHAGE -->
                 <?php foreach($experiences as $experience){ ?>
                     <div class="exp">
                         <span class="bold">
                         <?= $experience['TypeExp']," -" ?>
-                        <?= $experience['NomOrga'],"-" ?></span>
+                        <?= $experience['NomOrga']," -" ?></span>
                         <a type="button" class="align-self-center" data-toggle="collapse" data-target="#<?= "suppr",$experience['IdExp'] ?>" title='Supprimer'> <i class="far fa-trash-alt"></i> </a>
                         <a type="button" class="align-self-center" data-toggle="collapse" data-target="#<?= "edit",$experience['IdExp'] ?>" title='Modifier'> <i class="far fa-edit"></i> </a>
                         <br>

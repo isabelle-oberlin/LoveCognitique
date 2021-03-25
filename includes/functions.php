@@ -35,14 +35,14 @@ function getSetCommune($ville, $region, $pays){
     $query->execute(array($ville, $region, $pays));
     $commune = $query->fetch();
 
-    if(isset($commune)){
+    if($query->rowCount() == 1){
         return $commune['IdCommune'];
     }
     else{
         $max = $bdd->prepare('select max(IdCommune) from Commune');
         $max->execute();
         $new_id = $max->fetch();
-        $new_id = $new_id['max(IdCommune)'];
+        $new_id = $new_id['max(IdCommune)'] + 1;
 
         $requete = $bdd->prepare('insert into Commune (IdCommune, NomCommune, Region, Pays) values (?,?,?,?)');
         $requete->execute(array($new_id, $ville, $region, $pays));
