@@ -3,8 +3,7 @@
             include_once 'includes/head.php';
             include_once 'includes/functions.php';
             session_start();
-            //FIXME est ce que l'admin a le droit de modifier le profil d'un élève ?
-            //cas admin
+            
             if (!isAdminConnected() && isUserConnected())
             {
                 $mailAlumni = $_SESSION['mail']; 
@@ -16,7 +15,7 @@
                 $confidentialite = getLocalDb()->prepare('select * from Confidentialite where IdAlumni=?');
                 $confidentialite->execute(array($eleve['IdAlumni']));
                 $confi = $confidentialite->fetch();
-                
+
                 $com = getLocalDb()->prepare('select * from commune where IdCommune=?');
                 $com->execute(array($eleve['IdCommune']));
                 $commune = $com->fetch();
@@ -76,7 +75,7 @@
                             <?php } ?>
 
                                          <!-- COMMENT CA MARCHE CES DEUX LIGNES??-->  
-                        <input type="hidden" name="action" value="update">
+                        <input type="hidden" name="action" value="updateProfile">
                         <input type="hidden" name="id" value="<?= $eleve['IdAlumni'] ?>">
                      
                         <?php if (isset($error)) { ?>
@@ -243,9 +242,11 @@
                         <br><br>
                         <?= $experience['Description'] ?>
                         <br>
+
+                    <!-- SUPPRESSION -->
                         <div id="<?= "suppr",$experience['IdExp'] ?>" class="collapse in align-bottom">
                             <form method ="POST" action ="traitementProfil.php">
-                                <input type="hidden" name="action" value="update_exp">
+                                <input type="hidden" name="action" value="suppr">
                                 <input type="hidden" name="id" value="<?= $experience['IdExp'] ?>"><br>
                                 <button type="submit" class="btn btn-danger">Supprimer définitivement</button>
                                 <br><br>
