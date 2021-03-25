@@ -64,8 +64,8 @@
               
               <!-- MODIFICATION PROFIL PAR USER -->    
 
-              <a type="button" class="align-self-center" data-toggle="collapse" data-target="#<?= "modifier",$eleve['IdAlumni'] ?>" title='Modifier'> <span class="btn btn-secondary active">Modifier mon profil</span></a>
-                <div id="<?= "modifier", $eleve['IdAlumni'] ?>"class="collapse in">
+              <a type="button" class="align-self-center" data-toggle="collapse" data-target="#<?= "modifierprofil",$eleve['IdAlumni'] ?>" title='modifierprofil'> <span class="btn btn-secondary active">Modifier mon profil</span></a>
+                <div id="<?= "modifierprofil", $eleve['IdAlumni'] ?>"class="collapse in">
                     <div class="form-container">
                         <form class="form-horizontal" method ="POST" action ="traitementProfil.php">
                             <?php if (isset($error)) { ?>

@@ -24,13 +24,15 @@
                 $idcommune=$idcommune['IdCommune'];
                 
               
-                $stmt = $bdd->prepare('insert into Alumni (IdAlumni, NomEleve, PrenomEleve, Promo, AdressePostale, Mail, Mdp, Genre, Tel, Valide, IdCommune, IdGestionnaire) 
-                values (:IdAlumni, :NomEleve, :PrenomEleve, :Promo, :AdressePostale, :Mail, :Mdp, :Genre, :Tel, 0, :idCommune, 1)');
+                $stmt = $bdd->prepare('insert into Alumni (IdAlumni, NomEleve, PrenomEleve, Promo, Ville, Région, Pays, Mail, Mdp, Genre, Tel, Valide, IdCommune, IdGestionnaire) 
+                values (:IdAlumni, :NomEleve, :PrenomEleve, :Promo, :Ville, :Région, :Pays, :Mail, :Mdp, :Genre, :Tel, 0, :idCommune, 1)');
                 $stmt->bindValue(':IdAlumni', $new_id);
                 $stmt->bindValue(':NomEleve', escape($_POST['Nom']));
                 $stmt->bindValue(':PrenomEleve', escape($_POST['Prenom']));
                 $stmt->bindValue(':Promo', escape($_POST['Promo']));
-                $stmt->bindValue(':AdressePostale', escape($_POST['Adresse']));
+                $stmt->bindValue(':Ville', escape($_POST['Ville']));
+                $stmt->bindValue(':Région', escape($_POST['Région']));
+                $stmt->bindValue(':Pays', escape($_POST['Pays']));
                 $stmt->bindValue(':Mail', escape($_POST['Mail']));
                 $stmt->bindValue(':Mdp', escape($_POST['motdepasse']));
                 $stmt->bindValue(':Genre', escape($_POST['genre']));
