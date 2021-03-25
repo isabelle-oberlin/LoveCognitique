@@ -27,6 +27,20 @@ function getLocalDb() {
     array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
 
+function getSetCommune($ville, $region, $pays){
+
+    $query = getLocalDb()->prepare('select * from Commune where NomCommune=? and Region=? and Pays=?');
+    $query->execute(array($ville, $region, $pays));
+    $commune = $query->fetch();
+
+    if(isset($commune)){
+        return $commune['IdCommune'];
+    }
+    else{
+        $requete = getLocalDb()->
+    }
+}
+
 // Check if a user is connected
 function isUserConnected() {
     return isset($_SESSION['mail']);
