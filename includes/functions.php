@@ -29,15 +29,24 @@ function getLocalDb() {
 
 function getSetCommune($ville, $region, $pays){
 
-    $query = getLocalDb()->prepare('select * from Commune where NomCommune=? and Region=? and Pays=?');
-    $query->execute(array($ville, $region, $pays));
+    $bdd = getLocalDb();
+
+    $query = $bdd->prepare('select * from Commune where lower(NomCommune)=? and lower(Region)=? and lower(Pays)=?');
+    $query->execute(array(strtolower($ville), strtolower($region), strtolower($pays)));
     $commune = $query->fetch();
 
     if(isset($commune)){
         return $commune['IdCommune'];
     }
     else{
-        $requete = getLocalDb()->
+        $max = $bdd->prepare('select max(IdCommune) from Commune');
+        $max->execute();
+        $new_id = $max->fetch();
+        $new_id = $new_id['max(IdCommune)'];
+
+        $requete = $bdd->prepare('insert into Commune (IdCommune, NomCommune, Region, Pays) values (?,?,?,?)');
+        $requete->execute(array($new_id, $ville, $region, $pays));
+        return $new_id;
     }
 }
 
