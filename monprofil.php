@@ -79,7 +79,6 @@
                         <input type="hidden" name="action" value="update">
                         <input type="hidden" name="id" value="<?= $eleve['IdAlumni'] ?>">
                      
-                        
                         <?php if (isset($error)) { ?>
                                     <div class="alert alert-danger">
                                         <strong>Erreur !</strong> <?= $error ?>
