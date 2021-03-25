@@ -17,7 +17,7 @@
                         $new_id = $new_id['max(IdExp)'];
                         $new_id += 1;
                         
-                        $requete = getLocalDb()->prepare('insert into experiences (IdExp, Descripition, Salaire, DateDeb, DateFin, TypeExp, IdOrga, IdAlumni)
+                        $requete = getLocalDb()->prepare('insert into experiences (IdExp, Description, Salaire, DateDeb, DateFin, TypeExp, IdOrga, IdAlumni)
                         values (?, ?, ?, ?, ?, ?, ?, ?');
                         $requete->execute(array($new_id, escape($_POST['desc']), escape($_POST['salaire']), $_POST['datedeb']), $_POST['datefin'], $_POST['type'], $NumOrga, $_POST['IdAlumni']);
                 }
