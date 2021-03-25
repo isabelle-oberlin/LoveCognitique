@@ -12,6 +12,10 @@
                 $requete->bindValue(':mailA', "{$mailAlumni}");
                 $requete->execute();
                 $eleve = $requete->fetch();
+
+                $confidentialite = getLocalDb()->prepare('select * from Confidentialite where IdAlumni=?');
+                $confidentialite->execute(array($eleve['IdAlumni']));
+                $confi = $confidentialite->fetch();
                 
                 $com = getLocalDb()->prepare('select * from commune where IdCommune=?');
                 $com->execute(array($eleve['IdCommune']));
@@ -21,6 +25,17 @@
                 from experiences, organisations where IdAlumni=? and organisations.IdOrga = experiences.IdOrga order by DateFin desc');
                 $exp->execute(array($eleve['IdAlumni']));
                 $experiences = $exp->fetchAll();
+
+                function selectSecteur(){
+                    $query = getLocalDb()->query('select * from Secteur');
+                    $secteurs = $query->fetchAll();
+                    
+                    foreach($secteurs as $secteur){
+                        $IdSecteur = $secteur['IdSecteur'];
+                        $NomSecteur = $secteur['NomSecteur'];
+                        print "<option value=\"$IdSecteur\">$NomSecteur</option>";
+                    }
+                }
             }
           
         ?>
@@ -34,26 +49,12 @@
         <br>
             <div class=" content">
             <div class="Jumbotron container">
-                <h3 class="display-4"><?= $eleve['PrenomEleve']," ",$eleve['NomEleve'] ?></h3>
+                <h3 class="display-4"><?= $eleve['PrenomEleve']," ",$eleve['NomEleve'] ?>  - Promotion : <?= $eleve['Promo'] ?><br></h3>
                 <hr class="my-4">
                 
-                <b>Promotion : <?= $eleve['Promo'] ?><br></b>
-             
-                <div class="custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" id="conficommune" name="conficommune">
-                    <label class="custom-control-label" for="configenre">Rendre ma commune visible à tous les élèves</label>
-                </div>
-                <b>Commune : <?= $commune['NomCommune'], ", ", $commune['Pays'] ?></b><br>
                 
-                <div class="custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" id="confimail" name="confimail">
-                    <label class="custom-control-label" for="configenre">Rendre mon mail visible à tous les élèves</label>
-                </div>
+                <b>Commune : <?= $commune['NomCommune'], ", ", $commune['Pays'] ?></b><br>
                 <b>Mail : <?= $eleve['Mail'] ?><br></b>
-                <div class="custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" id="confitel" name="confitel">
-                    <label class="custom-control-label" for="configenre">Rendre mon numéro visible à tous les élèves</label>
-                </div>
                 <b>Téléphone : +33<?= $eleve['Tel'] ?></b><br>
                 <b>Genre : <?= $eleve['Genre'] ?></b>
 
@@ -62,7 +63,7 @@
                 <p>Vous pouvez laisser votre numéro de téléphone ou votre mail en public, pour que les nouvelles générations vous demandent des conseils ;) Faites-leur profiter de votre expérience !</p>
               
               
-              <!-- MODIFICATION POSSIBLE PAR L UTILISATEUR: -->    
+              <!-- MODIFICATION PROFIL PAR USER -->    
 
               <a type="button" class="align-self-center" data-toggle="collapse" data-target="#<?= "modifier",$eleve['IdAlumni'] ?>" title='Modifier'> <span class="btn btn-secondary active">Modifier mon profil</span></a>
                 <div id="<?= "modifier", $eleve['IdAlumni'] ?>"class="collapse in">
@@ -79,46 +80,83 @@
                         <input type="hidden" name="id" value="<?= $eleve['IdAlumni'] ?>">
                      
                         
-                        <fieldset class="borderline-clear">
+                        <?php if (isset($error)) { ?>
+                                    <div class="alert alert-danger">
+                                        <strong>Erreur !</strong> <?= $error ?>
+                                    </div>
+                                <?php } ?>
+
+                                <fieldset class="borderline-clear">
                                 <div class="form-group" >
                                     <i class="fas input-icon"></i>
-                                    <input class="form-control" name="Nom" type="text" value = "<?php echo $eleve['NomEleve'] ?>" required>
+                                    <input class="form-control" name="Nom" type="text" placeholder="Nom" value="<?= $eleve['NomEleve'] ?>" required> 
                                 </div>
                                 <div class="form-group">
                                     <i class="fas input-icon"></i>
-                                    <input class="form-control" name="Prenom" type="text" placeholder="Prenom" value = "<?php echo $eleve['PrenomEleve'] ?>" required> 
+                                    <input class="form-control" name="Prenom" type="text" placeholder="Prenom" value="<?= $eleve['PrenomEleve'] ?>" required> 
                                 </div>
                                 <div class="form-group">
                                     <i class="fas input-icon"></i>
-                                    <input class="form-control" name="Promo" type="text" placeholder="Année de sortie" value = "<?php echo $eleve['Promo'] ?>" required>
-                                </div>   
+                                    <input class="form-control" name="Promo" type="text" placeholder="Année de sortie" value="<?= $eleve['Promo'] ?>" required>
+                                </div>
+                                </fieldset>     
                                     
-                                <div class="form-group">
-                                    <i class="fas input-icon"></i>
-                                <input class="form-control" name="Adresse" type="text" placeholder="Adresse" value = "<?php echo $eleve['AdressePostale'] ?>" >
+                                <fieldset class="borderline-pink">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="confiadresse" name="confiadresse" <?php if ($confi['ConfiAdresse']!=0) { echo 'checked'; } ?> >
+                                    <label class="custom-control-label" for="confiadresse">Rendre ces informations visibles à tous les éléves</label>
                                 </div>
-                                
                                 <div class="form-group">
                                     <i class="fas input-icon"></i>
-                                    <input class="form-control" name="Mail" type="mail" placeholder="Mail" value = "<?php echo $eleve['Mail'] ?>" required>
-                                </div> 
-                                
-                                <div class="form-group">
-                                    <i class="fas input-icon"></i>
-                                    <input class="form-control" name="motdepasse" type="password" placeholder="Mot de passe" value = "<?php echo $eleve['Mdp'] ?>" required>
+                                <input class="form-control" name="Adresse" type="text" placeholder="Adresse" value="<?= $eleve['AdressePostale'] ?>">
                                 </div>
-                            
                                 <div class="form-group">
                                     <i class="fas input-icon"></i>
-                                    <input class="form-control" name="Tel" type="text" placeholder="Tel" value = "<?php echo $eleve['Tel'] ?>" >
-                                </div>  
-                               
-                                <div class="form-group">
-                                    <input type="radio" name="genre" value="H" <?php if ($eleve['Genre'] == 'H') { echo 'checked'; } ?> > Homme 
-                                    <input type="radio" name="genre" value="F" <?php if ($eleve['Genre'] == 'F') { echo 'checked'; } ?>> Femme 
-                                    <input type="radio" name="genre" value="NB" <?php if ($eleve['Genre'] == 'H') { echo 'checked'; } ?>> NB   
+                                <input class="form-control" name="cp" type="text" placeholder="Code Postal" value="FIXME">
                                 </div>
+                                </fieldset> 
                                 
+                                <fieldset class="borderline-pink">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="confimail" name="confimail" <?php if ($confi['ConfiMail']!=0) { echo 'checked'; } ?>>
+                                    <label class="custom-control-label" for="confimail">Rendre cette information visible à tous les éléves</label>
+                                </div>
+                                <div class="form-group">
+                                    <i class="fas input-icon"></i>
+                                    <input class="form-control" name="Mail" type="mail" placeholder="Mail" value="<?= $eleve['Mail'] ?>"  required>
+                                </div>
+                                </fieldset>   
+                                    
+                                <fieldset class="borderline-clear">
+                                <div class="form-group">
+                                    <i class="fas input-icon"></i>
+                                    <input class="form-control" name="motdepasse" type="password" placeholder="Mot de passe" value="<?= $eleve['Mdp'] ?>"required>
+                                </div>
+                                </fieldset> 
+                                
+                                <fieldset class="borderline-pink">    
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="confitel" name="confitel" <?php if ($confi['ConfiTel']!=0) { echo 'checked'; } ?>>
+                                    <label class="custom-control-label" for="confitel">Rendre cette information visible à tous les éléves</label>
+                                </div>
+                                <div class="form-group">
+                                    <i class="fas input-icon"></i>
+                                    <input class="form-control" name="Tel" type="text" value="<?= $eleve['Tel'] ?>" placeholder="Tel">
+                                </div>
+                                </fieldset> 
+                                
+                                <fieldset class="borderline-pink">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="configenre" name="configenre" <?php if ($confi['ConfiGenre']!=0) { echo 'checked'; } ?>>
+                                    <label class="custom-control-label" for="configenre">Rendre cette information visible à tous les éléves</label>
+                                </div>
+                                <div class="" >
+                                    
+                                    <input type="radio" name="genre" value="H" <?php if ($eleve['Genre']=="H") { echo 'checked'; } ?> required> Homme 
+                                    <input type="radio" name="genre" value="F"<?php if ($eleve['Genre']=="F") { echo 'checked'; } ?> > Femme 
+                                    <input type="radio" name="genre" value="NB" <?php if ($eleve['Genre']=="NB") { echo 'checked'; } ?> > NB   
+                                </div>
+                                </fieldset> 
                                 <button type="submit" class="btn signin">Allons-y !</button>
                             
                             </form>
@@ -129,12 +167,13 @@
 
                
               
-                
+                <!-- EXPERIENCES -->
                 
                 <div>
                    <h2> <span class="display-4">Expériences</span> <a type="button" class="align-self-center" data-toggle="collapse" data-target="#add" title='Ajouter une expérience'><i class="fas fa-plus-circle"></i></a></h2> 
                 </div>
                 <div id="add" class="collapse in">
+                            <!-- AJOUT EXP -->
                     <div class="form-container">
                             <form class="form-horizontal" method ="POST" action ="traitementProfil.php">
 
@@ -145,7 +184,7 @@
                                 <?php } ?>
                                            
                                 <input type="hidden" name="action" value="ajouter">
-                                <input type="hidden" name="IdAlumni" value="<?= $eleve['IdAlumni'] ?>"
+                                <input type="hidden" name="IdAlumni" value="<?= $eleve['IdAlumni'] ?>">
                                 
                                 <div class="h5" >
                                     <label for="type">Type d'expérience : </label>
@@ -184,8 +223,9 @@
                                 
                             </form>
                     </div>
-                
+                </div>
                 <hr class="my-3">
+                <!-- AFFICHAGE -->
                 <?php foreach($experiences as $experience){ ?>
                     <div class="exp">
                         <span class="bold">
@@ -213,6 +253,8 @@
                             </form>
                         </div>
                     </div>
+
+                    <!-- EDITION -->
                     <div id="<?= "edit",$experience['IdExp'] ?>" class="collapse in">
                         <br>
                          <div class="form-container">
@@ -264,7 +306,7 @@
                             </form>
                         </div>
                     </div>
-                    
+                    <hr class="my-4">
                                 
                 <?php } ?>
                 </div> 
