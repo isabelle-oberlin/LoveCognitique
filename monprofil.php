@@ -84,7 +84,7 @@
                                     </div>
                                 <?php } ?>
 
-                                <fieldset class="borderline-clear">
+                                
                                 <div class="form-group" >
                                     <i class="fas input-icon"></i>
                                     <input class="form-control" name="Nom" type="text" placeholder="Nom" value="<?= $eleve['NomEleve'] ?>" required> 
@@ -97,10 +97,8 @@
                                     <i class="fas input-icon"></i>
                                     <input class="form-control" name="Promo" type="text" placeholder="Année de sortie" value="<?= $eleve['Promo'] ?>" required>
                                 </div>
-                                </fieldset>   
-                                  
                                     
-                                <fieldset class="borderline-pink">
+                              
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" id="confiadresse" name="confiadresse" <?php if ($confi['ConfiAdresse']!=0) { echo 'checked'; } ?> >
                                     <label class="custom-control-label" for="confiadresse">Rendre ces informations visibles à tous les éléves</label>
@@ -109,19 +107,17 @@
                                     <i class="fas input-icon"></i>
                                 <input class="form-control" name="Adresse" type="text" placeholder="Adresse" value="<?= $eleve['AdressePostale'] ?>">
                                 </div>
-                               
+                                
                                 <div class="form-group">
                                     <i class="fas input-icon"></i>
                                 <input class="form-control" name="cp" type="text" placeholder="Code Postal" value="FIXME">
                                 </div>
+                               
                                 <div class="form-group">
                                     <i class="fas input-icon"></i>
                                 <input class="form-control" name="Pays" type="text" placeholder="Pays">
                                 </div>
                                 
-                                </fieldset> 
-                                
-                                <fieldset class="borderline-pink">
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" id="confimail" name="confimail" <?php if ($confi['ConfiMail']!=0) { echo 'checked'; } ?>>
                                     <label class="custom-control-label" for="confimail">Rendre cette information visible à tous les éléves</label>
@@ -130,16 +126,12 @@
                                     <i class="fas input-icon"></i>
                                     <input class="form-control" name="Mail" type="mail" placeholder="Mail" value="<?= $eleve['Mail'] ?>"  required>
                                 </div>
-                                </fieldset>   
-                                    
-                                <fieldset class="borderline-clear">
+
                                 <div class="form-group">
                                     <i class="fas input-icon"></i>
                                     <input class="form-control" name="motdepasse" type="password" placeholder="Mot de passe" value="<?= $eleve['Mdp'] ?>"required>
                                 </div>
-                                </fieldset> 
-                                
-                                <fieldset class="borderline-pink">    
+ 
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" id="confitel" name="confitel" <?php if ($confi['ConfiTel']!=0) { echo 'checked'; } ?>>
                                     <label class="custom-control-label" for="confitel">Rendre cette information visible à tous les éléves</label>
@@ -148,9 +140,7 @@
                                     <i class="fas input-icon"></i>
                                     <input class="form-control" name="Tel" type="text" value="<?= $eleve['Tel'] ?>" placeholder="Tel">
                                 </div>
-                                </fieldset> 
-                                
-                                <fieldset class="borderline-pink">
+
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" id="configenre" name="configenre" <?php if ($confi['ConfiGenre']!=0) { echo 'checked'; } ?>>
                                     <label class="custom-control-label" for="configenre">Rendre cette information visible à tous les éléves</label>
@@ -161,7 +151,7 @@
                                     <input type="radio" name="genre" value="F"<?php if ($eleve['Genre']=="F") { echo 'checked'; } ?> > Femme 
                                     <input type="radio" name="genre" value="NB" <?php if ($eleve['Genre']=="NB") { echo 'checked'; } ?> > NB   
                                 </div>
-                                </fieldset> 
+
                                 <button type="submit" class="btn signin">Allons-y !</button>
                             
                             </form>

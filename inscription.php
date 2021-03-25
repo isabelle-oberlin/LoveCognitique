@@ -25,7 +25,7 @@
                                     </div>
                                 <?php } ?>
 
-                                <fieldset class="borderline-clear">
+                     
                                 <div class="form-group" >
                                     <i class="fas input-icon"></i>
                                     <input class="form-control" name="Nom" type="text" placeholder="Nom" required> 
@@ -38,9 +38,7 @@
                                     <i class="fas input-icon"></i>
                                     <input class="form-control" name="Promo" type="text" placeholder="Année de sortie" required>
                                 </div>
-                                </fieldset>     
-                                    
-                                <fieldset class="borderline-pink">
+          
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" id="confiadresse" name="confiadresse">
                                     <label class="custom-control-label" for="confiadresse">Rendre ces informations visibles à tous les éléves</label>
@@ -57,9 +55,7 @@
                                     <i class="fas input-icon"></i>
                                 <input class="form-control" name="Pays" type="text" placeholder="Pays">
                                 </div>
-                                </fieldset> 
-                                
-                                <fieldset class="borderline-pink">
+
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" id="confimail" name="confimail">
                                     <label class="custom-control-label" for="confimail">Rendre cette information visible à tous les éléves</label>
@@ -68,16 +64,12 @@
                                     <i class="fas input-icon"></i>
                                     <input class="form-control" name="Mail" type="mail" placeholder="Mail" required>
                                 </div>
-                                </fieldset>   
-                                    
-                                <fieldset class="borderline-clear">
+
                                 <div class="form-group">
                                     <i class="fas input-icon"></i>
                                     <input class="form-control" name="motdepasse" type="password" placeholder="Mot de passe" required>
                                 </div>
-                                </fieldset> 
-                                
-                                <fieldset class="borderline-pink">    
+ 
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" id="confitel" name="confitel">
                                     <label class="custom-control-label" for="confitel">Rendre cette information visible à tous les éléves</label>
@@ -86,9 +78,7 @@
                                     <i class="fas input-icon"></i>
                                     <input class="form-control" name="Tel" type="text" placeholder="Tel">
                                 </div>
-                                </fieldset> 
-                                
-                                <fieldset class="borderline-pink">
+
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" id="configenre" name="configenre">
                                     <label class="custom-control-label" for="configenre">Rendre cette information visible à tous les éléves</label>
@@ -99,7 +89,6 @@
                                     <input type="radio" name="genre" value="F"> Femme 
                                     <input type="radio" name="genre" value="NB" checked> NB   
                                 </div>
-                                </fieldset> 
                                 
                                 <button type="submit" class="btn signin">Allons-y !</button>
                                 
