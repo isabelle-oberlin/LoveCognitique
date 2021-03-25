@@ -32,7 +32,7 @@ function getSetCommune($ville, $region, $pays){
     $bdd = getLocalDb();
 
     $query = $bdd->prepare('select * from Commune where lower(NomCommune)=? and lower(Region)=? and lower(Pays)=?');
-    $query->execute(array(strtolower($ville), strtolower($region), strtolower($pays)));
+    $query->execute(array($ville, $region, $pays));
     $commune = $query->fetch();
 
     if(isset($commune)){

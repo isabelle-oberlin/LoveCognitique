@@ -74,7 +74,7 @@
                             </div>
                             <?php } ?>
 
-                                         <!-- COMMENT CA MARCHE CES DEUX LIGNES??-->  
+                    
                         <input type="hidden" name="action" value="updateProfile">
                         <input type="hidden" name="id" value="<?= $eleve['IdAlumni'] ?>">
                      
@@ -97,7 +97,8 @@
                                     <i class="fas input-icon"></i>
                                     <input class="form-control" name="Promo" type="text" placeholder="Année de sortie" value="<?= $eleve['Promo'] ?>" required>
                                 </div>
-                                </fieldset>     
+                                </fieldset>   
+                                  
                                     
                                 <fieldset class="borderline-pink">
                                 <div class="custom-control custom-switch">
@@ -108,10 +109,16 @@
                                     <i class="fas input-icon"></i>
                                 <input class="form-control" name="Adresse" type="text" placeholder="Adresse" value="<?= $eleve['AdressePostale'] ?>">
                                 </div>
+                               
                                 <div class="form-group">
                                     <i class="fas input-icon"></i>
                                 <input class="form-control" name="cp" type="text" placeholder="Code Postal" value="FIXME">
                                 </div>
+                                <div class="form-group">
+                                    <i class="fas input-icon"></i>
+                                <input class="form-control" name="Pays" type="text" placeholder="Pays">
+                                </div>
+                                
                                 </fieldset> 
                                 
                                 <fieldset class="borderline-pink">

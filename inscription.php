@@ -47,11 +47,15 @@
                                 </div>
                                 <div class="form-group">
                                     <i class="fas input-icon"></i>
-                                <input class="form-control" name="Adresse" type="text" placeholder="Adresse">
+                                <input class="form-control" name="Ville" type="text" placeholder="Ville">
                                 </div>
                                 <div class="form-group">
                                     <i class="fas input-icon"></i>
-                                <input class="form-control" name="cp" type="text" placeholder="Code Postal">
+                                <input class="form-control" name="Region" type="text" placeholder="Région">
+                                </div>
+                                <div class="form-group">
+                                    <i class="fas input-icon"></i>
+                                <input class="form-control" name="Pays" type="text" placeholder="Pays">
                                 </div>
                                 </fieldset> 
                                 
