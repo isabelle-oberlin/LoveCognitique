@@ -31,9 +31,9 @@ require_once "includes/head.php";
 
      <?php
     
-    if (empty($_GET['recherche']) == false)
+    if (empty($_POST['recherche']) == false)
     {
-    $key = escape($_GET['recherche']);
+    $key = escape($_POST['recherche']);
     }
     else //éviter l'erreur d'index indéfini quand l'utilisateur n'a pas encore tapé dans la barre de recherche
     {
