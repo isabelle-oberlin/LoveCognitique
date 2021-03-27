@@ -119,7 +119,7 @@ option:disabled{
 .form-container{ font-family: 'Mukta', sans-serif; }
 .form-container .form-icon{
     
-    color : paleturquoise;
+    color : linear-gradient(to top, #f1cde48f, #d0e2ea);
     font-size: 88px;
     text-align: center;
     line-height: 107px;
@@ -132,14 +132,14 @@ option:disabled{
 }
 .form-container .form-horizontal{
     
-    background: paleturquoise;
+    background: linear-gradient(to top, #f1cde48f, #d0e2ea);
     padding: 35px 20px 5px;
     position: relative;
 }
 .form-container .form-horizontal:before{
     
     content: '';
-    background: linear-gradient(-45deg,transparent 49%, paleturquoise 50%);
+    background: #d0e2ea;
     height: 30px;
     width: 30px;
     transform: translateX(-50%) rotate(45deg);

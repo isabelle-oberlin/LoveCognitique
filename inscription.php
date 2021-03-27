@@ -41,7 +41,7 @@
           
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" id="confiadresse" name="confiadresse">
-                                    <label class="custom-control-label" for="confiadresse">Rendre ces informations visibles à tous les éléves</label>
+                                    <label class="custom-control-label" for="confiadresse">Rendre ces informations visibles à tous les élèves</label>
                                 </div>
                                 <div class="form-group">
                                     <i class="fas input-icon"></i>
@@ -58,7 +58,7 @@
 
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" id="confimail" name="confimail">
-                                    <label class="custom-control-label" for="confimail">Rendre cette information visible à tous les éléves</label>
+                                    <label class="custom-control-label" for="confimail">Rendre cette information visible à tous les élèves</label>
                                 </div>
                                 <div class="form-group">
                                     <i class="fas input-icon"></i>
@@ -72,7 +72,7 @@
  
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" id="confitel" name="confitel">
-                                    <label class="custom-control-label" for="confitel">Rendre cette information visible à tous les éléves</label>
+                                    <label class="custom-control-label" for="confitel">Rendre cette information visible à tous les élèves</label>
                                 </div>
                                 <div class="form-group">
                                     <i class="fas input-icon"></i>
@@ -81,7 +81,7 @@
 
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" id="configenre" name="configenre">
-                                    <label class="custom-control-label" for="configenre">Rendre cette information visible à tous les éléves</label>
+                                    <label class="custom-control-label" for="configenre">Rendre cette information visible à tous les élèves</label>
                                 </div>
                                 <div class="" >
                                     

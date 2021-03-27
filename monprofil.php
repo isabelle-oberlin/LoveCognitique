@@ -21,19 +21,40 @@
                 $commune = $com->fetch();
 
                 $exp = getLocalDb()->prepare('select *, DATE_FORMAT(DateDeb, "%d/%m/%Y") as DateDebFr, DATE_FORMAT(DateFin, "%d/%m/%Y") as DateFinFr 
-                from experiences, organisations where IdAlumni=? and organisations.IdOrga = experiences.IdOrga order by DateFin desc');
+                from experiences, organisations, poste where IdAlumni=? and organisations.IdOrga = experiences.IdOrga and Poste.IdPoste = experiences.IdPoste order by DateFin desc');
                 $exp->execute(array($eleve['IdAlumni']));
                 $experiences = $exp->fetchAll();
-
+                
+                function getSecteurs($IdExp){
+                $get = getLocalDb()->prepare('select Secteur.IdSecteur, NomSecteur from experiences, categorise, secteur 
+                where experiences.IdExp=? and categorise.IdExp = experiences.IdExp and secteur.IdSecteur = categorise.IdSecteur order by NomSecteur ASC');
+                $get->execute(array($IdExp));
+                $secteurs = $get->fetchAll();
+                if($get->rowCount()!= 0)
+                    return $secteurs;
+                else{return null;}
+                }
+                
                 function selectSecteur(){
-                    $query = getLocalDb()->query('select * from Secteur');
-                    $secteurs = $query->fetchAll();
+                        $query = getLocalDb()->query('select * from Secteur');
+                        $secteurs = $query->fetchAll();
                     
-                    foreach($secteurs as $secteur){
-                        $IdSecteur = $secteur['IdSecteur'];
-                        $NomSecteur = $secteur['NomSecteur'];
-                        print "<option value=\"$IdSecteur\">$NomSecteur</option>";
-                    }
+                        foreach($secteurs as $secteur){
+                            $IdSecteur = $secteur['IdSecteur'];
+                            $NomSecteur = $secteur['NomSecteur'];
+                            print "<option value=\"$IdSecteur\">$NomSecteur</option>";
+                        }
+                }
+                
+                function selectPoste(){
+                        $query = getLocalDb()->query('select * from Poste');
+                        $postes = $query->fetchAll();
+                    
+                        foreach($postes as $poste){
+                            $IdPoste = $poste['IdPoste'];
+                            $NomPoste = $poste['NomPoste'];
+                            print "<option value=\"$IdPoste\">$NomPoste</option>";
+                        }
                 }
             }
           
@@ -65,7 +86,8 @@
               <!-- MODIFICATION PROFIL PAR USER -->    
 
               <a type="button" class="align-self-center" data-toggle="collapse" data-target="#<?= "modifierprofil",$eleve['IdAlumni'] ?>" title='modifierprofil'> <span class="btn btn-secondary active">Modifier mon profil</span></a>
-                <div id="<?= "modifierprofil", $eleve['IdAlumni'] ?>"class="collapse in">
+                
+                <div id="<?= "modifierprofil", $eleve['IdAlumni'] ?>"class="collapse in"><br>
                     <div class="form-container">
                         <form class="form-horizontal" method ="POST" action ="traitementProfil.php">
                             <?php if (isset($error)) { ?>
@@ -97,22 +119,10 @@
                                     <i class="fas input-icon"></i>
                                     <input class="form-control" name="Promo" type="text" placeholder="Année de sortie" value="<?= $eleve['Promo'] ?>" required>
                                 </div>
-                                    
-                        <div class="select">
-                            <select name="slct" id="slct" placeholder="Pays">
-                              <option selected disabled>Pays</option>
-                              <option value="1">Pure CSS</option>
-                              <option value="2">No JS</option>
-                              <option value="3">Nice!</option>
-                            </select>
-                        </div>
-                        <div id="Ajoutertruc" class="collapse in">
-                            C4ESTBON
-                        </div>
-                              
+                                                                
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" id="confiadresse" name="confiadresse" <?php if ($confi['ConfiAdresse']!=0) { echo 'checked'; } ?> >
-                                    <label class="custom-control-label" for="confiadresse">Rendre ces informations visibles à tous les éléves</label>
+                                    <label class="custom-control-label" for="confiadresse">Rendre ces informations visibles à tous les élèves</label>
                                 </div>
                                 <div class="form-group">
                                     <i class="fas input-icon"></i>
@@ -129,7 +139,7 @@
                                
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" id="confimail" name="confimail" <?php if ($confi['ConfiMail']!=0) { echo 'checked'; } ?> >
-                                    <label class="custom-control-label" for="confimail">Rendre cette information visible à tous les éléves</label>
+                                    <label class="custom-control-label" for="confimail">Rendre cette information visible à tous les élèves</label>
                                 </div>
                                 <div class="form-group">
                                     <i class="fas input-icon"></i>
@@ -143,7 +153,7 @@
  
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" id="confitel" name="confitel" <?php if ($confi['ConfiTel']!=0) { echo 'checked'; } ?> >
-                                    <label class="custom-control-label" for="confitel">Rendre cette information visible à tous les éléves</label>
+                                    <label class="custom-control-label" for="confitel">Rendre cette information visible à tous les élèves</label>
                                 </div>
                                 <div class="form-group">
                                     <i class="fas input-icon"></i>
@@ -152,7 +162,7 @@
 
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" id="configenre" name="configenre" <?php if ($confi['ConfiGenre']!=0) { echo 'checked'; } ?> >
-                                    <label class="custom-control-label" for="configenre">Rendre cette information visible à tous les éléves</label>
+                                    <label class="custom-control-label" for="configenre">Rendre cette information visible à tous les élèves</label>
                                 </div>
                                 <div class="" >
                                     
@@ -215,19 +225,71 @@
                                 </div>                                 
                                 
                                 
-                                    <label for="datedeb"> Date de début </label>
+                                    <label for="datedeb"> Date de début :</label>
                                     <div class="form-group">
                                         <i class="fas input-icon"></i>
                                         <input class="form-control" name="datedeb" placeholder="Pipou" type="date" required>
                                     </div>
                                 
-                                    <label for="datedeb"> Date de fin </label>
+                                    <label for="datedeb"> Date de fin :</label>
                                     <div class="form-group">
                                         <i class="fas input-icon"></i>
                                     <input class="form-control" name="datefin" type="date">
                                     </div> 
-                                
-                                                                
+                                    
+                                    <div class="row align-items-end">
+                                        <div class="select mx-3">
+                                            <select name="secteur1" required>
+                                                <option disabled>Secteur 1</option>
+                                                <?php selectSecteur(); ?>
+                                            </select>
+                                        </div>
+                                        <div class="select mx-3">
+                                            <select name="secteur2">
+                                                <option disabled>Secteur 2</option>
+                                                <?php selectSecteur(); ?>
+                                            </select>
+                                        </div>
+                                        <a type="button" class="align-self-center mx-3" data-toggle="collapse" data-target="#addSecteur" title='Ajouter une expérience'><i class="fas fa-plus-circle"></i> Demander l'ajout d'un secteur</a>
+                                    </div>
+                                    <br>
+                                    
+                                    <div id="addSecteur" class="collapse in">
+                                        <div class="form-group">
+                                            <i class="fas input-icon"></i>
+                                            <input class="form-control" name="nomsecteur" type="text" placeholder="Nom du secteur">
+                                        </div> 
+                                        <div class="form-group">
+                                            <i class="fas input-icon"></i>
+                                            <input class="form-control" name="desccourte" type="text" placeholder="Description Longue">
+                                        </div>  
+                                        <div class="form-group"> 
+                                            <i class="fas input-icon-textarea"></i>
+                                            <textarea class="form-control" rows="8" placeholder="Description Longue" name="desclongue"></textarea> 
+                                        </div>  
+                                    </div>
+                                    
+                                    <div class="row align-items-end">
+                                        <div class="select mx-3">
+                                            <select name="poste" placeholder="Pays">
+                                                <option selected disabled>Poste</option>
+                                                <?php selectPoste(); ?>
+                                            </select>
+                                        </div>
+                                        <a type="button" class="align-self-center mx-3" data-toggle="collapse" data-target="#addPoste" title='Ajouter une expérience'><i class="fas fa-plus-circle"></i> Demander l'ajout d'un secteur</a>
+                                    </div>
+                                    <br>
+                                    
+                                    <div id="addPoste" class="collapse in">
+                                        <div class="form-group">
+                                            <i class="fas input-icon"></i>
+                                            <input class="form-control" name="nomposte" type="text" placeholder="Nom du Poste">
+                                        </div> 
+                                        <div class="form-group">
+                                            <i class="fas input-icon"></i>
+                                            <input class="form-control" name="descposte" type="text" placeholder="descPoste">
+                                        </div>  
+                                    </div>
                                 <button type="submit" class="btn signin">Allons-y !</button>
                                 
                             </form>
@@ -243,6 +305,16 @@
                         <a type="button" class="align-self-center" data-toggle="collapse" data-target="#<?= "suppr",$experience['IdExp'] ?>" title='Supprimer'> <i class="far fa-trash-alt"></i> </a>
                         <a type="button" class="align-self-center" data-toggle="collapse" data-target="#<?= "edit",$experience['IdExp'] ?>" title='Modifier'> <i class="far fa-edit"></i> </a>
                         <br>
+                        <?php if(isset($experience['NomPoste'])){ 
+                            echo "Poste : ",$experience['NomPoste'],"<br>";
+                        }
+                        $listesecteur = getSecteurs($experience['IdExp']);
+                        if(isset($listesecteur)){
+                            echo "Secteur.s : ";
+                            foreach (getSecteurs($experience['IdExp']) as $sect){ print $sect['NomSecteur'].' '; }
+                            echo'<br>';
+                        }
+                        ?> 
                         <?php if(isset($experience['DateFinFr'])){ 
                             echo "Du ",$experience['DateDebFr']," au ",$experience['DateFinFr'];
                         }
@@ -310,8 +382,42 @@
                                 <div class="form-group">
                                     <i class="fas input-icon"></i>
                                 <input class="form-control" name="datefin" type="date" value="<?= $experience['DateFin'] ?>">
-                                </div>                           
-                                                                
+                                </div>
+                                
+                                <?php
+                                    if(isset($experience['NomPoste'])){ 
+                                        echo "Poste : ",$experience['NomPoste'],"<br>";
+                                    }
+                                    $id = $experience['IdExp'];
+                                    $temp = getSecteurs($id);
+                                    
+                                    if(isset($temp)){
+                                        echo "Secteur.s : ";
+                                        foreach ($temp as $sect){ print $sect['NomSecteur'].' '; }
+                                    }
+                                ?>
+                                
+                                <div class="row align-items-end">
+                                    <div class="select mx-3">
+                                        <select name="secteur1" required>
+                                            <option selected disabled>Secteur 1</option>
+                                            <?php selectSecteur(); ?>
+                                        </select>
+                                    </div>
+                                    <div class="select mx-3">
+                                        <select name="secteur2">
+                                            <option selected disabled>Secteur 2</option>
+                                            <?php selectSecteur(); ?>
+                                        </select>
+                                    </div>                                        
+                                    <div class="select mx-3">
+                                        <select name="poste" placeholder="Pays">
+                                            <option selected disabled>Poste</option>
+                                            <?php selectPoste(); ?>
+                                        </select>
+                                    </div>
+                                </div> 
+                                <br>
                                 <button type="submit" class="btn signin">Modifier</button>
                                 
                             </form>
