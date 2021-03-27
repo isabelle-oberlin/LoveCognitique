@@ -2,7 +2,7 @@
 
 
 <?php  include_once 'includes/functions.php';
-            session_start();
+            
 
             //formulaire et création du compte. L'administrateur changera simplement le bool "validé"; 
             //pour l'instant on peut créer un compte avec juste Nom, Promo, Mdp, pas besoin de if, le required html le fait pour nous
@@ -20,6 +20,8 @@
                         $new_id = $query->fetch();
                         $new_id = $new_id['max(IdExp)'];
                         $new_id += 1;
+
+                        $NumOrga = getSetOrganisation(escape($_POST['NomOrga']), escape($_POST['TypeOrga']), escape($_POST['Ville']), escape($_POST['Region']), escape($_POST['Pays']));
                         
                         $requete = $bdd->prepare('insert into experiences (IdExp, Description, Salaire, DateDeb, DateFin, TypeExp, IdOrga, IdAlumni)
                         values (?, ?, ?, ?, ?, ?, ?, ?');
@@ -30,8 +32,7 @@
                     //SUPPRIMER EXPERIENCE
                     case "suppr":
                         $query= $bdd->prepare('delete from experiences where experiences.IdExp = :idexp');
-                        //C EST LE BON ID COMME CA???
-                        // pas besoin de faire une requête à part avec $idexp = $idexp['IdExp'];
+                        //parametre id passe en hidden
                         $query->bindValue(':idexp', escape($_POST['id']));
                         $query->execute();
                         $query->fetch();
@@ -52,7 +53,6 @@
                         $stmt->bindValue(':Mdp', escape($_POST['motdepasse']));
                         $stmt->bindValue(':Genre', escape($_POST['genre']));
                         $stmt->bindValue(':Tel', escape($_POST['Tel']));
-                        //Pour l'instant on a encore un pb s'il met une nouvelle commune dans le edit de son profil.
                         $stmt->bindValue(':IdCommune', $idcommune);
                         $stmt->bindValue(':IdAlumni', $id);
                         $stmt->execute();

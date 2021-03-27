@@ -1,8 +1,9 @@
 <html>
         <?php
+            session_start();
             include_once 'includes/head.php';
             include_once 'includes/functions.php';
-            session_start();
+            
 
             $IdAlumni = $_GET['id'];
             $requete = getLocalDb()->prepare('select * from alumni where IdAlumni=?');

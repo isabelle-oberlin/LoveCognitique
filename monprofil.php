@@ -1,8 +1,9 @@
 <html>
         <?php
+            session_start();
             include_once 'includes/head.php';
             include_once 'includes/functions.php';
-            session_start();
+            
             
             if (!isAdminConnected() && isUserConnected())
             {
@@ -195,7 +196,7 @@
 
                                 <div class="form-group" >
                                     <i class="fas input-icon"></i>
-                                    <input class="form-control" name="NomEntre" type="text" placeholder="Nom de l'entreprise" required> 
+                                    <input class="form-control" name="NomOrga" type="text" placeholder="Nom de l'entreprise" required> 
                                 </div>
 
                                 <div class="form-group">
@@ -371,7 +372,7 @@
 
                                 <div class="form-group" >
                                     <i class="fas input-icon"></i>
-                                    <input class="form-control" name="NomEntre" type="text" placeholder="Nom de l'entreprise" value="<?= $experience['NomOrga'] ?>" required> 
+                                    <input class="form-control" name="NomOrga" type="text" placeholder="Nom de l'entreprise" value="<?= $experience['NomOrga'] ?>" required> 
                                 </div>
 
                                 <div class="form-group">
