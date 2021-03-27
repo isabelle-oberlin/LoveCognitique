@@ -1,7 +1,7 @@
 <?php
     include_once 'includes/functions.php';
    
-    
+    session_start();
     $key = escape($_GET['recherche']);
     $array = array();
     $bdd=getLocalDb();
@@ -20,7 +20,7 @@
         <?php
             include_once 'includes/head.php';
             include_once 'includes/functions.php';
-            session_start();
+            
         ?>
     <body>
         <?php
