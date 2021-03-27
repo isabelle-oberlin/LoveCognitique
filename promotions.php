@@ -6,9 +6,23 @@ session_start();
 
 
 <?php 
-require_once "includes/head.php"; 
+    require_once "includes/head.php"; 
+    if (empty($_POST['recherche']) == false){
+        $key = escape($_POST['recherche']);
+    }
+    else //éviter l'erreur d'index indéfini quand l'utilisateur n'a pas encore tapé dans la barre de recherche
+    {
+        $key = 1; //se garantir un affichage vide, mais l'index est défini.
+    }
+
+    $bdd=getLocalDb();
+    $query= $bdd->prepare('select distinct * from alumni where Promo = :thispromo');
+    $query->bindValue(':thispromo', "{$key}%");
+    $query->execute();
+    $eleves = $query->fetchAll();
+
 ?>
-<!doctype html>
+
 <html>
 
 <body>
@@ -28,25 +42,7 @@ require_once "includes/head.php";
             </div>
         </div>
      </form>
-
-     <?php
-    
-    if (empty($_POST['recherche']) == false)
-    {
-    $key = escape($_POST['recherche']);
-    }
-    else //éviter l'erreur d'index indéfini quand l'utilisateur n'a pas encore tapé dans la barre de recherche
-    {
-        $key = 1; //se garantir un affichage vide, mais l'index est défini.
-    }
-    $bdd=getLocalDb();
-    $query= $bdd->prepare('select distinct * from alumni where Promo = :thispromo');
-    $query->bindValue(':thispromo', "{$key}%");
-    $query->execute();
-    $eleves = $query->fetchAll();
-  
-    ?>
-        
+       
         <table class="table">
             <thead>
                 <tr>
