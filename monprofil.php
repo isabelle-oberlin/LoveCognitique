@@ -76,7 +76,7 @@
                 
                 <b>Commune : <?= $commune['NomCommune'], ", ",$commune['Region'], ", ", $commune['Pays'] ?></b><br>
                 <b>Mail : <?= $eleve['Mail'] ?><br></b>
-                <b>Téléphone : +33<?= $eleve['Tel'] ?></b><br>
+                <b>Téléphone : <?= $eleve['Tel'] ?></b><br>
                 <b>Genre : <?= $eleve['Genre'] ?></b>
 
                  

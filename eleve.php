@@ -47,7 +47,7 @@
                         <?php } ?></br>
 
                         <?php if($confidentialite['ConfiTel']|| isAdminConnected()){ ?>
-                        Téléphone : +33<?= $eleve['Tel'] ?>
+                        Téléphone : <?= $eleve['Tel'] ?>
                         <?php } ?></br>
 
                         <?php if($confidentialite['ConfiGenre']|| isAdminConnected()){ ?>
