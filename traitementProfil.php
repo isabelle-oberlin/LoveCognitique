@@ -32,7 +32,6 @@
                 //parametre id passe en hidden
                 $query->bindValue(':idexp', escape($_POST['id']));
                 $query->execute();
-                $query->fetch();
         
 
             //MODIFIER PROFIL
@@ -66,7 +65,7 @@
                 $confidentialite->bindValue(':ConfiTel', $confiTel);
                 $confidentialite->bindValue(':IdAlumni', $id);
                 $confidentialite->execute();
-                $confidentialite->fetch();
+
         }
         redirect('monprofil.php');
     }
