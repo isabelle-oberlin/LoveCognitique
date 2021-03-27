@@ -8,7 +8,7 @@ include_once 'includes/functions.php';
 session_start();
 
 $bdd = getLocalDb();
-$query= $bdd->prepare('select * from Alumni where Valide = 0');
+$query= $bdd->prepare('select * from alumni where Valide = 0');
 $query->execute();
 $eleves = $query->fetchAll();
 

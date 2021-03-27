@@ -10,12 +10,12 @@ session_start();
             if (!isAdminConnected() && isUserConnected())
             {
                 $mailAlumni = $_SESSION['mail']; 
-                $requete = getLocalDb()->prepare('select * from Alumni where mail =:mailA');
+                $requete = getLocalDb()->prepare('select * from alumni where mail =:mailA');
                 $requete->bindValue(':mailA', "{$mailAlumni}");
                 $requete->execute();
                 $eleve = $requete->fetch();
 
-                $confidentialite = getLocalDb()->prepare('select * from Confidentialite where IdAlumni=?');
+                $confidentialite = getLocalDb()->prepare('select * from confidentialite where IdAlumni=?');
                 $confidentialite->execute(array($eleve['IdAlumni']));
                 $confi = $confidentialite->fetch();
 

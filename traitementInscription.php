@@ -7,7 +7,7 @@
     {
         $bdd = getLocalDb();
         //trouver l'id du nouveau compte
-        $query= $bdd->prepare('select max(IdAlumni) from Alumni');
+        $query= $bdd->prepare('select max(IdAlumni) from alumni');
         $query->execute();
         $new_id = $query->fetch();
         $new_id = $new_id['max(IdAlumni)'];
@@ -17,7 +17,7 @@
         $idcommune= getSetCommune(escape($_POST['Ville']), escape($_POST['Region']), escape($_POST['Pays']));
 
         
-        $stmt = $bdd->prepare('insert into Alumni (IdAlumni, NomEleve, PrenomEleve, Promo, Mail, Mdp, Genre, Tel, Valide, IdCommune, IdGestionnaire) 
+        $stmt = $bdd->prepare('insert into alumni (IdAlumni, NomEleve, PrenomEleve, Promo, Mail, Mdp, Genre, Tel, Valide, IdCommune, IdGestionnaire) 
         values (:IdAlumni, :NomEleve, :PrenomEleve, :Promo, :Mail, :Mdp, :Genre, :Tel, 0, :idCommune, 1)');
         $stmt->bindValue(':IdAlumni', $new_id);
         $stmt->bindValue(':NomEleve', escape($_POST['Nom']));
@@ -37,7 +37,7 @@
         if($_POST['confitel']){$confiTel = 1;} else{$confiTel = 0;}
         if($_POST['configenre']){$confiGenre = 1;} else{$confiGenre = 0;}
         
-        $confidentialite = $bdd->prepare('insert into Confidentialite (IdConfidentialite, ConfiAdresse, ConfiMail, ConfiGenre, ConfiTel, IdAlumni) 
+        $confidentialite = $bdd->prepare('insert into confidentialite (IdConfidentialite, ConfiAdresse, ConfiMail, ConfiGenre, ConfiTel, IdAlumni) 
         values (:IdConfidentialite, :ConfiAdresse, :ConfiMail, :ConfiGenre, :ConfiTel, :IdAlumni)');
         $confidentialite->bindValue(':IdConfidentialite', $new_id);
         $confidentialite->bindValue(':ConfiAdresse', $confiAdresse);

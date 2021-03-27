@@ -21,13 +21,13 @@ session_start();
 
           while(! feof($file))
           {
-          $query= $bdd->prepare('select max(IdAlumni) from Alumni');
+          $query= $bdd->prepare('select max(IdAlumni) from alumni');
            $query->execute();
             $new_id = $query->fetch();
             $new_id = $new_id['max(IdAlumni)'];
             $new_id += 1;
 
-          $stmt = $bdd->prepare('insert into Alumni (IdAlumni, NomEleve, PrenomEleve, Promo, AdressePostale, Mail, Mdp, Genre, Tel, Valide, IdCommune, IdGestionnaire) values (:IdAlumni, :NomEleve, :PrenomEleve, :Promo, :AdressePostale, :Mail, :Mdp, :Genre, :Tel, 1, :idCommune, 1)');
+          $stmt = $bdd->prepare('insert into alumni (IdAlumni, NomEleve, PrenomEleve, Promo, AdressePostale, Mail, Mdp, Genre, Tel, Valide, IdCommune, IdGestionnaire) values (:IdAlumni, :NomEleve, :PrenomEleve, :Promo, :AdressePostale, :Mail, :Mdp, :Genre, :Tel, 1, :idCommune, 1)');
           $stmt->bindValue(':IdAlumni', $new_id);
           $stmt->bindValue(':NomEleve', fgets($file));
           $stmt->bindValue(':PrenomEleve', fgets($file));
@@ -36,7 +36,7 @@ session_start();
           $stmt->bindValue(':Mail', fgets($file));
           $stmt->bindValue(':Mdp', fgets($file));
           
-         $query= $bdd->prepare('select Genre from Alumni where Genre= :g');
+         $query= $bdd->prepare('select Genre from alumni where Genre= :g');
                 $query->bindValue(':g', fgets($file));
                 $query->execute();
                 $genre=$query->fetch();
@@ -47,7 +47,7 @@ session_start();
           $stmt->bindValue(':Tel', fgets($file));
 
           $cp = fgets($file);
-                $query= $bdd->prepare('select IdCommune from Commune where CodePostal= :cp');
+                $query= $bdd->prepare('select IdCommune from commune where CodePostal= :cp');
                 $query->bindValue(':cp', $cp);
                 $query->execute();
                 $idcommune=$query->fetch();

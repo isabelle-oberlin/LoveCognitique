@@ -59,7 +59,7 @@
                 if($_POST['confitel'] != 0){$confiTel = 1;} else{$confiTel = 0;}
                 if($_POST['configenre'] != 0){$confiGenre = 1;} else{$confiGenre = 0;}
 
-                $confidentialite = $bdd->prepare('UPDATE Confidentialite SET ConfiAdresse=:ConfiAdresse, ConfiMail=:ConfiMail, ConfiGenre=:ConfiGenre, ConfiTel=:ConfiTel where IdAlumni=:IdAlumni');
+                $confidentialite = $bdd->prepare('UPDATE confidentialite SET ConfiAdresse=:ConfiAdresse, ConfiMail=:ConfiMail, ConfiGenre=:ConfiGenre, ConfiTel=:ConfiTel where IdAlumni=:IdAlumni');
                 $confidentialite->bindValue(':ConfiAdresse', $confiAdresse);
                 $confidentialite->bindValue(':ConfiMail', $confiMail);
                 $confidentialite->bindValue(':ConfiGenre', $confiGenre);

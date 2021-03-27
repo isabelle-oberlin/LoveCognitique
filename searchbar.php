@@ -6,7 +6,7 @@
     $array = array();
     $bdd=getLocalDb();
     //on pourra rajouter or Experience.Type = 'stage' ...
-    $query= $bdd->prepare('select distinct * from Alumni, Commune, Confidentialite, Experiences, Organisations where NomEleve LIKE :name or PrenomEleve LIKE :name or Commune.NomCommune = :commune 
+    $query= $bdd->prepare('select distinct * from alumni, commune, confidentialite, experiences, organisations where NomEleve LIKE :name or PrenomEleve LIKE :name or Commune.NomCommune = :commune 
     and Commune.IdCommune = Alumni.IdCommune and Alumni.IdAlumni = Confidentialite.IdAlumni and Experiences.IdOrga = Organisations.IdOrga and Organisations.IdCommune = Commune.IdCommune');
     $query->bindValue(':name', "{$key}%");
     //FIXME pour l'instant on ne change pas la requête suivant le bouton radio coché en fait... ça ne change rien XD

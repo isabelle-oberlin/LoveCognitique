@@ -35,12 +35,12 @@ require_once "includes/head.php";
     {
     $key = escape($_GET['recherche']);
     }
-    /*else   //éviter l'erreur d'index indéfini quand l'utilisateur n'a pas encore tapé dans la barre de recherche
+    else //éviter l'erreur d'index indéfini quand l'utilisateur n'a pas encore tapé dans la barre de recherche
     {
         $key = 1; //se garantir un affichage vide, mais l'index est défini.
-    }*/
+    }
     $bdd=getLocalDb();
-    $query= $bdd->prepare('select distinct * from Alumni where Promo = :thispromo');
+    $query= $bdd->prepare('select distinct * from alumni where Promo = :thispromo');
     $query->bindValue(':thispromo', "{$key}%");
     $query->execute();
     $eleves = $query->fetchAll();
