@@ -5,12 +5,26 @@
     $key = escape($_GET['recherche']);
     $array = array();
     $bdd=getLocalDb();
-    //on pourra rajouter or Experience.Type = 'stage' ...
-    $query= $bdd->prepare('select distinct * from alumni, commune, confidentialite, experiences, organisations where NomEleve LIKE :name or PrenomEleve LIKE :name or Commune.NomCommune = :commune 
-    and Commune.IdCommune = Alumni.IdCommune and Alumni.IdAlumni = Confidentialite.IdAlumni and Experiences.IdOrga = Organisations.IdOrga and Organisations.IdCommune = Commune.IdCommune');
-    $query->bindValue(':name', "{$key}%");
-    //FIXME pour l'instant on ne change pas la requête suivant le bouton radio coché en fait... ça ne change rien XD
-    $query->bindValue(':commune', "{$key}%");
+
+    $type = $_GET['searchType'];
+    switch($type)
+    {
+        case "eleve":
+            $query= $bdd->prepare('select distinct * from alumni where NomEleve = :key or PrenomEleve = :key');
+            break;
+        
+        case "secteur":
+            $query= $bdd->prepare('select distinct * from experiences, secteur where NomSecteur = :key');
+        
+        case "type":
+            $query= $bdd->prepare('select distinct * from experiences where TypeExp = :key');
+        
+        case "region":
+            $query= $bdd->prepare('select distinct * from experiences, organisations, commune where organisations.IdCommune = commune.IdCommune and experiences.IdOrga = organisations.IdOrga and commune.Region = :key');     
+    }
+
+   
+    $query->bindValue(':key', "{$key}%");
     $query->execute();
     $results = $query->fetchAll();
      
