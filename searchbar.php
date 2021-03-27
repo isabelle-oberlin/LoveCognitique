@@ -10,7 +10,7 @@
     switch($type)
     {
         case "eleve":
-            $query= $bdd->prepare('select distinct * from alumni where NomEleve = :key or PrenomEleve = :key');
+            $query= $bdd->prepare('select distinct * from alumni, confidentialite, commune where NomEleve like :key or PrenomEleve like :key and confidentialite.IdAlumni=alumni.IdAlumni and commune.IdCommune=alumni.IdCommune');
             break;
         
         case "secteur":

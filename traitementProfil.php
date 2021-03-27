@@ -20,15 +20,19 @@
 
                 $NumOrga = getSetOrganisation(escape($_POST['NomOrga']), escape($_POST['TypeOrga']), escape($_POST['Ville']), escape($_POST['Region']), escape($_POST['Pays']));
                 
+
                 $requete = $bdd->prepare('insert into experiences (IdExp, Description, Salaire, DateDeb, DateFin, TypeExp, IdPoste, IdOrga, IdAlumni)
-                values (?, ?, ?, ?, ?, ?, ?, ?');
-                $requete->execute(array($new_id, escape($_POST['desc']), escape($_POST['salaire']), $_POST['datedeb']), $_POST['datefin'], $_POST['type'], $_POST['IdPoste'], $NumOrga, $_POST['IdAlumni']);
-
+                values (?, ?, ?, ?, ?, ?, ?, ?, ?)');
                 
-
+                $requete->execute(array($new_id, escape($_POST['desc']), escape($_POST['salaire']), $_POST['datedeb'], $_POST['datefin'], $_POST['type'], $_POST['poste'], $NumOrga, $_POST['IdAlumni']));
+                
+                $categorisation = $bdd->prepare('replace into categorise values (?,?); insert into appartient values (?,?)');
+                if(isset($_POST['secteur1'])){ $categorisation->execute(array($new_id, $_POST['secteur1'], $NumOrga, $_POST['secteur1'])); $categorisation->closeCursor(); }
+                if(isset($_POST['secteur2'])){ $categorisation->execute(array($new_id, $_POST['secteur2'], $NumOrga, $_POST['secteur2'])); }
+                
             //SUPPRIMER EXPERIENCE
             case "suppr":
-                $query= $bdd->prepare('delete from experiences where experiences.IdExp = :idexp');
+                $query= $bdd->prepare('delete from experiences where experiences.IdExp=:idexp; delete from categorise where categorise.IdExp=:idexp');
                 //parametre id passe en hidden
                 $query->bindValue(':idexp', escape($_POST['id']));
                 $query->execute();
