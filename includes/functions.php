@@ -39,12 +39,12 @@ function getSetCommune($ville, $region, $pays){
         return $commune['IdCommune'];
     }
     else{
-        $max = $bdd->prepare('select max(IdCommune) from Commune');
+        $max = $bdd->prepare('select max(IdCommune) from commune');
         $max->execute();
         $new_id = $max->fetch();
         $new_id = $new_id['max(IdCommune)'] + 1;
 
-        $requete = $bdd->prepare('insert into Commune (IdCommune, NomCommune, Region, Pays) values (?,?,?,?)');
+        $requete = $bdd->prepare('insert into commune (IdCommune, NomCommune, Region, Pays) values (?,?,?,?)');
         $requete->execute(array($new_id, $ville, $region, $pays));
         return $new_id;
     }
@@ -83,7 +83,7 @@ function getSecteurs($IdExp){
 }
 
 function selectSecteur(){
-        $query = getLocalDb()->query('select * from Secteur');
+        $query = getLocalDb()->query('select * from secteur');
         $secteurs = $query->fetchAll();
     
         foreach($secteurs as $secteur){
@@ -94,7 +94,7 @@ function selectSecteur(){
 }
 
 function selectPoste(){
-        $query = getLocalDb()->query('select * from Poste');
+        $query = getLocalDb()->query('select * from poste');
         $postes = $query->fetchAll();
     
         foreach($postes as $poste){
