@@ -54,12 +54,12 @@ function getSetOrganisation($nom, $typeOrga, $ville, $region, $pays){
     
     $bdd = getLocalDb();
     $idCommune = getSetCommune($ville, $region, $pays);
-    $query = $bdd->prepare('select * from organisations, commune where NomOrga=? and orgainisations.IdCommune=? and commune.IdCommune = orgainisations.IdCommune');
+    $query = $bdd->prepare('select * from organisations, commune where NomOrga=? and organisations.IdCommune=? and commune.IdCommune = organisations.IdCommune');
     $query->execute(array($nom, $idCommune));
     $orga = $query->fetch();
 
     if($query->rowCount() == 1){
-        return $commune['IdOrga'];
+        return $orga['IdOrga'];
     }
     else{
         $max = $bdd->prepare('select max(IdOrga) from organisations');
