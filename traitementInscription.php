@@ -30,13 +30,14 @@
         $stmt->bindValue(':idCommune', $idcommune);
         $stmt->execute();
         $stmt->fetch();
+        echo 'alumnisé';
         
         
         if($_POST['confiadresse']){$confiAdresse = 1;} else{$confiAdresse = 0;}
         if($_POST['confimail']){$confiMail = 1;} else{$confiMail = 0;}
         if($_POST['confitel']){$confiTel = 1;} else{$confiTel = 0;}
         if($_POST['configenre']){$confiGenre = 1;} else{$confiGenre = 0;}
-        
+        echo 'passage des if';
         $confidentialite = $bdd->prepare('insert into confidentialite (IdConfidentialite, ConfiAdresse, ConfiMail, ConfiGenre, ConfiTel, IdAlumni) 
         values (:IdConfidentialite, :ConfiAdresse, :ConfiMail, :ConfiGenre, :ConfiTel, :IdAlumni)');
         $confidentialite->bindValue(':IdConfidentialite', $new_id);
@@ -46,6 +47,7 @@
         $confidentialite->bindValue(':ConfiTel', $confiTel);
         $confidentialite->bindValue(':IdAlumni', $new_id);
         $confidentialite->execute();
+        echo 'dans confidentialite';
         $confidentialite->fetch();
         
     }
