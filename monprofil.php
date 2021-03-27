@@ -21,7 +21,8 @@
                 $commune = $com->fetch();
 
                 $exp = getLocalDb()->prepare('select *, DATE_FORMAT(DateDeb, "%d/%m/%Y") as DateDebFr, DATE_FORMAT(DateFin, "%d/%m/%Y") as DateFinFr 
-                from experiences, organisations, poste where IdAlumni=? and organisations.IdOrga = experiences.IdOrga and Poste.IdPoste = experiences.IdPoste order by DateFin desc');
+                from experiences, organisations, poste, commune 
+                where IdAlumni=? and organisations.IdOrga = experiences.IdOrga and Poste.IdPoste = experiences.IdPoste and commune.IdCommune=organisations.IdCommune order by DateFin desc');
                 $exp->execute(array($eleve['IdAlumni']));
                 $experiences = $exp->fetchAll();
                 
@@ -73,7 +74,7 @@
                 <hr class="my-4">
                 
                 
-                <b>Commune : <?= $commune['NomCommune'], ", ", $commune['Pays'] ?></b><br>
+                <b>Commune : <?= $commune['NomCommune'], ", ",$commune['Region'], ", ", $commune['Pays'] ?></b><br>
                 <b>Mail : <?= $eleve['Mail'] ?><br></b>
                 <b>Téléphone : +33<?= $eleve['Tel'] ?></b><br>
                 <b>Genre : <?= $eleve['Genre'] ?></b>
@@ -126,15 +127,15 @@
                                 </div>
                                 <div class="form-group">
                                     <i class="fas input-icon"></i>
-                                <input class="form-control" name="Ville" type="text" placeholder="Ville" value="<?= $commune['NomCommune'] ?>">
+                                <input class="form-control" name="Ville" type="text" placeholder="Ville" value="<?= $commune['NomCommune'] ?>" required>
                                 </div>
                                 <div class="form-group">
                                     <i class="fas input-icon"></i>
-                                <input class="form-control" name="Region" type="text" placeholder="Region" value="<?= $commune['Region'] ?>">
+                                <input class="form-control" name="Region" type="text" placeholder="Region" value="<?= $commune['Region'] ?>" required>
                                 </div> 
                                 <div class="form-group">
                                     <i class="fas input-icon"></i>
-                                <input class="form-control" name="Pays" type="text" placeholder="Pays" value="<?= $commune['Pays'] ?>">
+                                <input class="form-control" name="Pays" type="text" placeholder="Pays" value="<?= $commune['Pays'] ?>" required>
                                 </div>
                                
                                 <div class="custom-control custom-switch">
@@ -143,12 +144,12 @@
                                 </div>
                                 <div class="form-group">
                                     <i class="fas input-icon"></i>
-                                    <input class="form-control" name="Mail" type="mail" placeholder="Mail" value="<?= $eleve['Mail'] ?>"  required>
+                                    <input class="form-control" name="Mail" type="mail" placeholder="Mail" value="<?= $eleve['Mail'] ?>" required>
                                 </div>
 
                                 <div class="form-group">
                                     <i class="fas input-icon"></i>
-                                    <input class="form-control" name="motdepasse" type="password" placeholder="Mot de passe" value="<?= $eleve['Mdp'] ?>"required>
+                                    <input class="form-control" name="motdepasse" type="password" placeholder="Mot de passe" value="<?= $eleve['Mdp'] ?>" required>
                                 </div>
  
                                 <div class="custom-control custom-switch">
@@ -213,6 +214,19 @@
                                     <i class="fas input-icon"></i>
                                     <input class="form-control" name="NomEntre" type="text" placeholder="Nom de l'entreprise" required> 
                                 </div>
+
+                                <div class="form-group">
+                                    <i class="fas input-icon"></i>
+                                <input class="form-control" name="Ville" type="text" placeholder="Ville" required>
+                                </div>
+                                <div class="form-group">
+                                    <i class="fas input-icon"></i>
+                                <input class="form-control" name="Region" type="text" placeholder="Region" required>
+                                </div> 
+                                <div class="form-group">
+                                    <i class="fas input-icon"></i>
+                                <input class="form-control" name="Pays" type="text" placeholder="Pays" required>
+                                </div>
                                 
                                 <div class="form-group"> 
                                     <i class="fas input-icon-textarea"></i>
@@ -240,13 +254,13 @@
                                     <div class="row align-items-end">
                                         <div class="select mx-3">
                                             <select name="secteur1" required>
-                                                <option disabled>Secteur 1</option>
+                                                <option selected disabled>Secteur 1</option>
                                                 <?php selectSecteur(); ?>
                                             </select>
                                         </div>
                                         <div class="select mx-3">
                                             <select name="secteur2">
-                                                <option disabled>Secteur 2</option>
+                                                <option selected disabled>Secteur 2</option>
                                                 <?php selectSecteur(); ?>
                                             </select>
                                         </div>
@@ -316,12 +330,13 @@
                         }
                         ?> 
                         <?php if(isset($experience['DateFinFr'])){ 
-                            echo "Du ",$experience['DateDebFr']," au ",$experience['DateFinFr'];
+                            echo "Du ",$experience['DateDebFr']," au ",$experience['DateFinFr'],'<br>';
                         }
                         else {
-                            echo "Depuis le ",$experience['DateDebFr'];
+                            echo "Depuis le ",$experience['DateDebFr'],'<br>';
                         }
                         ?> 
+                        <?= $experience['NomCommune'], ", ",$experience['Region'], ", ", $experience['Pays'] ?>
                         <br><br>
                         <?= $experience['Description'] ?>
                         <br>
@@ -363,6 +378,19 @@
                                 <div class="form-group" >
                                     <i class="fas input-icon"></i>
                                     <input class="form-control" name="NomEntre" type="text" placeholder="Nom de l'entreprise" value="<?= $experience['NomOrga'] ?>" required> 
+                                </div>
+
+                                <div class="form-group">
+                                    <i class="fas input-icon"></i>
+                                <input class="form-control" name="Ville" type="text" placeholder="Ville" value="<?= $experience['NomCommune'] ?>" required>
+                                </div>
+                                <div class="form-group">
+                                    <i class="fas input-icon"></i>
+                                <input class="form-control" name="Region" type="text" placeholder="Region" value="<?= $experience['Region'] ?>" required>
+                                </div> 
+                                <div class="form-group">
+                                    <i class="fas input-icon"></i>
+                                <input class="form-control" name="Pays" type="text" placeholder="Pays" value="<?= $experience['Pays'] ?>" required>
                                 </div>
                                 
                                 <div class="form-group"> 
