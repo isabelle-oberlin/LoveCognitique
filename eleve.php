@@ -22,7 +22,7 @@ session_start();
 
             $exp = getLocalDb()->prepare('select *, DATE_FORMAT(DateDeb, "%d/%m/%Y") as DateDebFr, DATE_FORMAT(DateFin, "%d/%m/%Y") as DateFinFr 
                 from experiences, organisations, poste, commune 
-                where IdAlumni=? and organisations.IdOrga = experiences.IdOrga and Poste.IdPoste = experiences.IdPoste and commune.IdCommune=organisations.IdCommune order by DateFin desc');
+                where IdAlumni=? and organisations.IdOrga = experiences.IdOrga and poste.IdPoste = experiences.IdPoste and commune.IdCommune=organisations.IdCommune order by DateFin desc');
                 $exp->execute(array($eleve['IdAlumni']));
                 $experiences = $exp->fetchAll();
         ?>
