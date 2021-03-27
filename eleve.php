@@ -78,7 +78,7 @@ session_start();
                             echo'<br>';
                         }
                         ?> 
-                        <?php if(isset($experience['DateFinFr'])){ 
+                        <?php if($experience['DateFinFr'] == '0000-00-00'){ 
                             echo "Du ",$experience['DateDebFr']," au ",$experience['DateFinFr'],'<br>';
                         }
                         else {

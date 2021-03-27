@@ -36,7 +36,20 @@
                 //parametre id passe en hidden
                 $query->bindValue(':idexp', escape($_POST['id']));
                 $query->execute();
-        
+            
+            //EDITER EXPERIENCE
+            case "update":
+
+                $NumOrga = getSetOrganisation(escape($_POST['NomOrga']), escape($_POST['TypeOrga']), escape($_POST['Ville']), escape($_POST['Region']), escape($_POST['Pays']));
+                $IdExp = $_POST['id'];
+
+                $requete = $bdd->prepare('update experiences set Description=?, Salaire=?, DateDeb=?, DateFin=?, TypeExp=?, IdOrga=? where IdExp=?');
+                
+                $requete->execute(array(escape($_POST['desc']), escape($_POST['salaire']), $_POST['datedeb'], $_POST['datefin'], $_POST['type'], $NumOrga, $IdExp));
+                
+                $categorisation = $bdd->prepare('replace into categorise values (?,?); insert into appartient values (?,?)');
+                if(isset($_POST['secteur1'])){ $categorisation->execute(array($IdExp, $_POST['secteur1'], $NumOrga, $_POST['secteur1'])); $categorisation->closeCursor(); }
+                if(isset($_POST['secteur2'])){ $categorisation->execute(array($IdExp, $_POST['secteur2'], $NumOrga, $_POST['secteur2'])); }
 
             //MODIFIER PROFIL
             case "updateProfile" : 
