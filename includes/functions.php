@@ -74,7 +74,7 @@ function getSetOrganisation($nom, $typeOrga, $ville, $region, $pays){
 }
 
 function getSecteurs($IdExp){
-    $get = getLocalDb()->prepare('select Secteur.IdSecteur, NomSecteur from experiences, categorise, secteur 
+    $get = getLocalDb()->prepare('select secteur.IdSecteur, NomSecteur from experiences, categorise, secteur 
     where experiences.IdExp=? and categorise.IdExp = experiences.IdExp and secteur.IdSecteur = categorise.IdSecteur order by NomSecteur ASC');
     $get->execute(array($IdExp));
     $secteurs = $get->fetchAll();
