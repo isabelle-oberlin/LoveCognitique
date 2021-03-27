@@ -26,36 +26,7 @@
                 $exp->execute(array($eleve['IdAlumni']));
                 $experiences = $exp->fetchAll();
                 
-                function getSecteurs($IdExp){
-                    $get = getLocalDb()->prepare('select Secteur.IdSecteur, NomSecteur from experiences, categorise, secteur 
-                    where experiences.IdExp=? and categorise.IdExp = experiences.IdExp and secteur.IdSecteur = categorise.IdSecteur order by NomSecteur ASC');
-                    $get->execute(array($IdExp));
-                    $secteurs = $get->fetchAll();
-                    if($get->rowCount()!= 0){ return $secteurs; }
-                    else{ return null; }
-                }
                 
-                function selectSecteur(){
-                        $query = getLocalDb()->query('select * from Secteur');
-                        $secteurs = $query->fetchAll();
-                    
-                        foreach($secteurs as $secteur){
-                            $IdSecteur = $secteur['IdSecteur'];
-                            $NomSecteur = $secteur['NomSecteur'];
-                            print "<option value=\"$IdSecteur\">$NomSecteur</option>";
-                        }
-                }
-                
-                function selectPoste(){
-                        $query = getLocalDb()->query('select * from Poste');
-                        $postes = $query->fetchAll();
-                    
-                        foreach($postes as $poste){
-                            $IdPoste = $poste['IdPoste'];
-                            $NomPoste = $poste['NomPoste'];
-                            print "<option value=\"$IdPoste\">$NomPoste</option>";
-                        }
-                }
             }
           
         ?>
