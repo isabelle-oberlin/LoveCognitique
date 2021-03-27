@@ -15,15 +15,17 @@
         
         case "secteur":
             $query= $bdd->prepare('select distinct * from experiences, secteur where NomSecteur = :key');
+            break;
         
         case "type":
             $query= $bdd->prepare('select distinct * from experiences where TypeExp = :key');
+            break;
         
         case "region":
-            $query= $bdd->prepare('select distinct * from experiences, organisations, commune where organisations.IdCommune = commune.IdCommune and experiences.IdOrga = organisations.IdOrga and commune.Region = :key');     
+            $query= $bdd->prepare('select distinct * from experiences, organisations, commune where organisations.IdCommune = commune.IdCommune and experiences.IdOrga = organisations.IdOrga and commune.Region = :key');  
+            break;   
     }
 
-   
     $query->bindValue(':key', "{$key}%");
     $query->execute();
     $results = $query->fetchAll();
