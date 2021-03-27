@@ -55,7 +55,6 @@ session_start();
 
           $stmt->bindValue(':idCommune', $idcommune);
           $stmt->execute();
-          $stmt->fetch();
         }
         //end of the while: supposedly, you begin again for the next student till you reach the eof
           ?>

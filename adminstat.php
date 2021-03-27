@@ -11,6 +11,7 @@ include_once 'includes/functions.php';
 <body>
 <?php include_once 'includes/header.php';?>
 <div class="content">
+<br>
 <h3> Ci-dessous, des statistiques :)</h3>
 </div>
 </body>
