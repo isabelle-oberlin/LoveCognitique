@@ -50,6 +50,11 @@ function getSetCommune($ville, $region, $pays){
     }
 }
 
+//getSetOrganisation($nom, $ville, $region, $pays){
+    
+    
+//}
+
 // Check if a user is connected
 function isUserConnected() {
     return isset($_SESSION['mail']);

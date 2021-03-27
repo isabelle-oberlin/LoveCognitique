@@ -27,13 +27,12 @@
                 $experiences = $exp->fetchAll();
                 
                 function getSecteurs($IdExp){
-                $get = getLocalDb()->prepare('select Secteur.IdSecteur, NomSecteur from experiences, categorise, secteur 
-                where experiences.IdExp=? and categorise.IdExp = experiences.IdExp and secteur.IdSecteur = categorise.IdSecteur order by NomSecteur ASC');
-                $get->execute(array($IdExp));
-                $secteurs = $get->fetchAll();
-                if($get->rowCount()!= 0)
-                    return $secteurs;
-                else{return null;}
+                    $get = getLocalDb()->prepare('select Secteur.IdSecteur, NomSecteur from experiences, categorise, secteur 
+                    where experiences.IdExp=? and categorise.IdExp = experiences.IdExp and secteur.IdSecteur = categorise.IdSecteur order by NomSecteur ASC');
+                    $get->execute(array($IdExp));
+                    $secteurs = $get->fetchAll();
+                    if($get->rowCount()!= 0){ return $secteurs; }
+                    else{ return null; }
                 }
                 
                 function selectSecteur(){
@@ -201,7 +200,7 @@
                                 <input type="hidden" name="action" value="ajouter">
                                 <input type="hidden" name="IdAlumni" value="<?= $eleve['IdAlumni'] ?>">
                                 
-                                <div class="h5" >
+                                <div class="h5">
                                     <label for="type">Type d'expérience : </label>
                                     <input type="radio" name="type" value="Stage" checked required> Stage
                                     <input type="radio" name="type" value="Emploi"> Emploi   
@@ -209,6 +208,19 @@
                                     <input type="radio" name="type" value="Césure"> Césure  
                                     <input type="radio" name="type" value="Autre"> Autre  
                                 </div>
+                                <div class="select align-self-center">
+                                    <select required name="TypeOrga">
+                                        <option selected disabled>Type d'organisation</option>
+                                        <option value="Entreprise">Entreprise</option>
+                                        <option value="Etablissement de l'enseignement supérieur">Etablissement de l'enseignement supérieur</option>
+                                        <option value="Association">Association</option>
+                                        <option value="Fondation">Fondation</option>
+                                        <option value="Administration">Administration</option>
+                                        <option value="Autre">Autre</option>
+                                    </select>
+                                </div>
+                                <br>
+                                
 
                                 <div class="form-group" >
                                     <i class="fas input-icon"></i>
@@ -374,6 +386,17 @@
                                     <input type="radio" name="type" value="Césure" <?php if ($experience['TypeExp']=="Césure") { echo 'checked'; } ?> > Césure  
                                     <input type="radio" name="type" value="Autre" <?php if ($experience['TypeExp']=="Autre") { echo 'checked'; } ?> > Autre  
                                 </div>
+                                <div class="select align-self-center">
+                                    <select name="TypeOrga">
+                                        <option <?php if ($experience['TypeOrga']=="Entreprise") { echo 'checked'; } ?> value="Entreprise">Entreprise</option>
+                                        <option <?php if ($experience['TypeOrga']=="Etablissement de l'enseignement supérieur") { echo 'checked'; } ?> value="Etablissement de l'enseignement supérieur">Etablissement de l'enseignement supérieur</option>
+                                        <option <?php if ($experience['TypeOrga']=="Association") { echo 'checked'; } ?> value="Association">Association</option>
+                                        <option <?php if ($experience['TypeOrga']=="Fondation") { echo 'checked'; } ?> value="Fondation">Fondation</option>
+                                        <option <?php if ($experience['TypeOrga']=="Administration") { echo 'checked'; } ?> value="Administration">Administration</option>
+                                        <option <?php if ($experience['TypeOrga']=="Autre") { echo 'checked'; } ?> value="Autre">Autre</option>
+                                    </select>
+                                </div>
+                                <br>
 
                                 <div class="form-group" >
                                     <i class="fas input-icon"></i>
