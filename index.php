@@ -32,6 +32,9 @@ session_start();
                     <label for="region">
                         <input type="radio" name="searchType" value="region"> Région
                     </label>
+                    <label for="poste">
+                        <input type="radio" name="searchType" value="poste"> Poste
+                    </label>
                 </div>
                 
                 <div class="sb-example-1 row justify-content-center">

@@ -14,16 +14,19 @@
             break;
         
         case "secteur":
-            $query= $bdd->prepare('select distinct * from experiences, secteur, categorise where experiences.IdExp = categorise.IdExp and secteur.IdSecteur = categorise.IdSecteur and NomSecteur like :key');
+            $query= $bdd->prepare('select distinct * from experiences, secteur, categorise, alumni where experiences.IdExp = categorise.IdExp and secteur.IdSecteur = categorise.IdSecteur and alumni.IdAlumni=experiences.IdAlumni and NomSecteur like :key');
             break;
         
         case "type":
-            $query= $bdd->prepare('select distinct * from experiences where TypeExp like :key');
+            $query= $bdd->prepare('select distinct * from experiences, alumni, organisations, commune where TypeExp like :key and alumni.IdAlumni=experiences.IdAlumni and organisations.IdOrga=experiences.IdOrga and commune.IdCommune=organisations.IdCommune');
             break;
         
         case "region":
-            $query= $bdd->prepare('select distinct * from experiences, organisations, commune where organisations.IdCommune = commune.IdCommune and experiences.IdOrga = organisations.IdOrga and commune.Region like :key');  
-            break;   
+            $query= $bdd->prepare('select distinct * from experiences, organisations, commune, alumni where organisations.IdCommune = commune.IdCommune and experiences.IdOrga = organisations.IdOrga and alumni.IdAlumni = experiences.IdAlumni and commune.Region like :key');  
+            break;
+            
+        case "poste":
+            $query = $bdd->prepare('select distinct * from experiences, poste, alumni, organisations, commune where NomPoste like :key and alumni.IdAlumni=experiences.IdAlumni and organisations.IdOrga=experiences.IdOrga and commune.IdCommune=organisations.IdCommune and experiences.IdPoste=poste.IdPoste');
     }
 
     $query->bindValue(':key', "{$key}%");
@@ -57,38 +60,32 @@
                             <p class="lead"><a href="eleve.php?id=<?= $resultat['IdAlumni'] ?>"><?= $resultat['PrenomEleve']," ",$resultat['NomEleve'] ?></a></p>
                             <p>Promotion : <?= $resultat['Promo'] ?> <?php if($resultat['ConfiAdresse'] == 1){?> Commune: <?php print $resultat['NomCommune']; } ?></p>
                         <?php    break;
-                        case "secteur" || "type" || "region": ?>
-                            <?php foreach($resultat as $ceresultat){ ?>
-                            <div class="exp">
-                            <span class="bold">
-                      
-                            <?php if(isset($ceresultat['NomPoste'])){ 
-                            echo "Poste : ",$ceresultat['NomPoste'],"<br>";
-                            }
-                            $listesecteur = getSecteurs($ceresultat['IdExp']);
-                            if(isset($listesecteur)){
-                            echo "Secteur.s : ";
-                            foreach (getSecteurs($ceresultat['IdExp']) as $sect){ print $sect['NomSecteur'].' '; }
-                            echo'<br>';
-                            }
-                            ?> 
-                            <?php if(isset($ceresultat['DateFinFr'])){ 
-                            echo "Du ",$ceresultat['DateDebFr']," au ",$ceresultat['DateFinFr'],'<br>';
-                            }
-                            else {
-                            echo "Depuis le ",$ceresultat['DateDebFr'],'<br>';
-                            }
-                            ?> 
-                            <?= $ceresultat['NomCommune'], ", ",$ceresultat['Region'], ", ", $ceresultat['Pays'] ?>
-                            <br><br>
-                            <?= $ceresultat['Description']  ?>
-                            <br>
-                            <?php 
-                                break;}
-                    }
-                    ?>
-                    <?php }
+                        case "region":  ?>
+                        <p class="lead"><a href="eleve.php?id=<?= $resultat['IdAlumni'] ?>"><?= $resultat['PrenomEleve']," ",$resultat['NomEleve'] ?></a></p>
+                            <p class="lead"> <?= $resultat['NomCommune'], " ", $resultat['Region']?> </p> 
+                            <p class="lead"> <?= "Description : ", $resultat['Description']  ?> </p> <?php
+                            break;
 
+                        case "secteur": ?>
+                        <p class="lead"><a href="eleve.php?id=<?= $resultat['IdAlumni'] ?>"><?= $resultat['PrenomEleve']," ",$resultat['NomEleve'] ?></a></p>
+                            <p class="lead"> <?= $resultat['NomSecteur'], ". Situation: ", $resultat['Region'], " ", $resultat['NomCommune']?> </p> 
+                            <p class="lead"> <?= "Description : ", $resultat['Description']  ?> </p> <?php
+                            break;
+                        
+                        case "type": ?>
+                        <p class="lead"><a href="eleve.php?id=<?= $resultat['IdAlumni'] ?>"><?= $resultat['PrenomEleve']," ",$resultat['NomEleve'] ?></a></p>
+                        <p class="lead"> <?= $resultat['TypeExp'], ". Situation: ", $resultat['Region'], " ", $resultat['NomCommune']?> </p> 
+                        <p class="lead"> <?= "Description : ", $resultat['Description']  ?> </p> <?php
+                            break;
+
+                        case "poste": ?>
+                        <p class="lead"><a href="eleve.php?id=<?= $resultat['IdAlumni'] ?>"><?= $resultat['PrenomEleve']," ",$resultat['NomEleve'] ?></a></p>
+                        <p class="lead"> <?= $resultat['NomPoste'], ". Situation: ", $resultat['Region'], " ", $resultat['NomCommune']?> </p> 
+                        <p class="lead"> <?= "Description : ", $resultat['Description']  ?> </p> <?php
+                            break;
+                        
+                    }?>
+                    <?php }
                   ?>
                 </div>                
             </div>
