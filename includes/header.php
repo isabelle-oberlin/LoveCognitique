@@ -21,7 +21,7 @@
             <a class="navbar-brand" href="promotions.php"> Promotions</a>
         </div>
 
-        <?php if (isUserConnected()) { ?>
+        <?php if (isUserConnected() && !isAdminConnected()) { ?>
             <div class="navbar-header">
                 <a class="navbar-brand" href="monprofil.php"><?= $_SESSION['mail']?> - Mon profil</a>
             </div>
