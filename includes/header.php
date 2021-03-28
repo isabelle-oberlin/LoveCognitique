@@ -23,13 +23,13 @@
 
         <?php if (isUserConnected()) { ?>
             <div class="navbar-header">
-                <a class="navbar-brand" href="monprofil.php">Mon profil</a>
+                <a class="navbar-brand" href="monprofil.php"><?= $_SESSION['mail']?> - Mon profil</a>
             </div>
         <?php } ?>
 
         <div class="navbar-header">
             <?php if (isUserConnected()) { ?>
-                <a class="navbar-brand" href="deconnexion.php"><?= $_SESSION['mail']?> - Se déconnecter</a>
+                <a class="navbar-brand" href="deconnexion.php">Se déconnecter</a>
             <?php } 
                 else {
             ?>
