@@ -8,3 +8,4 @@
     
     <title>LoveCo</title>
 </head>
+<!-- intègre css/bootstrap/icones fontawesome -->

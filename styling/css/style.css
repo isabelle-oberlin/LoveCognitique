@@ -19,6 +19,7 @@ div.botimage{
     min-height: calc(100vh - 16.5em);
 }
 
+/* pour un magnifique dégradé <3<3<3 */
 body{
     margin:0;
     padding:0;
@@ -32,6 +33,7 @@ body{
     justify-content: center;
 }
 
+/* petit outiline des expériences sur les pages personnelles */
 div.exp{
     border: solid 1px rgba(216, 112, 147, 0.37);
     border-radius: 1%;
@@ -59,7 +61,7 @@ textarea {
 form{
     margin-bottom: 2px;
 }
-
+/* Pour de selects jolis */
 select {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -114,6 +116,7 @@ select {
 option:disabled{
     color:black;
 }
+/* Fin du select Joli */
 
 /* TOUT SUR LES FORMS (CONNEXION NOTAMMENT)*/
 .form-container{ font-family: 'Mukta', sans-serif; }

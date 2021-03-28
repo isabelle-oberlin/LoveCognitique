@@ -1,19 +1,6 @@
 <?php
 
-// Connect to the database. Returns a PDO object
-function getDb() {
-    
-
-    $server = "10.185.0.92";
-    $username = "lovevwng_admin";
-    $password = "EncoreUneBDD!123";
-    $db = "lovevwng_BDD";
-
-    
-    return new PDO("mysql:host=$server;dbname=$db;charset=utf8", "$username", "$password",
-    array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-}
-
+//Acces to db 
 function getLocalDb() {
     
 
@@ -27,6 +14,7 @@ function getLocalDb() {
     array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
 
+//Renvoie l'id d'une commune existante ou crée une commune et renvoie une id si aucune ne correspond 
 function getSetCommune($ville, $region, $pays){
 
     $bdd = getLocalDb();
@@ -50,6 +38,7 @@ function getSetCommune($ville, $region, $pays){
     }
 }
 
+//Renvoie l'id d'une organisation existante ou crée une commune et renvoie une id si aucune ne correspond 
 function getSetOrganisation($nom, $typeOrga, $ville, $region, $pays){
     
     $bdd = getLocalDb();
@@ -73,6 +62,7 @@ function getSetOrganisation($nom, $typeOrga, $ville, $region, $pays){
     }
 }
 
+//renvoie les secteurs d'activite d'une certaine
 function getSecteurs($IdExp){
     $get = getLocalDb()->prepare('select secteur.IdSecteur, NomSecteur from experiences, categorise, secteur 
     where experiences.IdExp=? and categorise.IdExp = experiences.IdExp and secteur.IdSecteur = categorise.IdSecteur order by NomSecteur ASC');
@@ -82,6 +72,7 @@ function getSecteurs($IdExp){
     else{ return null; }
 }
 
+//crée les options pour un selecteur de secteurs 
 function selectSecteur(){
         $query = getLocalDb()->query('select * from secteur');
         $secteurs = $query->fetchAll();
@@ -93,6 +84,7 @@ function selectSecteur(){
         }
 }
 
+//crée les options pour un selecteur de postes
 function selectPoste(){
         $query = getLocalDb()->query('select * from poste');
         $postes = $query->fetchAll();
