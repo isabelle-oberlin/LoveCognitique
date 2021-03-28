@@ -41,7 +41,7 @@ session_start();
 
                     <span class="bold">
                         <?php if($confidentialite['ConfiAdresse'] || isAdminConnected()){ ?>
-                        Commune : <?= $commune['NomCommune'],", ",$commune['Pays'] ?></br>
+                        Commune : <?= $commune['NomCommune'], ", ",$commune['Region'], ", ", $commune['Pays'] ?></br>
                         <?php } ?>
 
                         <?php if($confidentialite['ConfiMail']|| isAdminConnected()){ ?>
