@@ -18,17 +18,21 @@
                 $new_id = $new_id['max(IdExp)'];
                 $new_id += 1;
 
+                if(empty($_POST['poste'])){$_POST['poste']=0;}
+
+                //Recupere l'id de l'organisation (et la crée si elle n'existe pas)
                 $NumOrga = getSetOrganisation(escape($_POST['NomOrga']), escape($_POST['TypeOrga']), escape($_POST['Ville']), escape($_POST['Region']), escape($_POST['Pays']));
                 
-
+                //insertion dans experiences
                 $requete = $bdd->prepare('insert into experiences (IdExp, Description, Salaire, DateDeb, DateFin, TypeExp, IdPoste, IdOrga, IdAlumni)
                 values (?, ?, ?, ?, ?, ?, ?, ?, ?)');
-                
                 $requete->execute(array($new_id, escape($_POST['desc']), escape($_POST['salaire']), $_POST['datedeb'], $_POST['datefin'], $_POST['type'], $_POST['poste'], $NumOrga, $_POST['IdAlumni']));
                 
+                //fait les liens entre organisations, experiences et secteur 
                 $categorisation = $bdd->prepare('replace into categorise values (?,?); insert into appartient values (?,?)');
                 if(isset($_POST['secteur1'])){ $categorisation->execute(array($new_id, $_POST['secteur1'], $NumOrga, $_POST['secteur1'])); $categorisation->closeCursor(); }
                 if(isset($_POST['secteur2'])){ $categorisation->execute(array($new_id, $_POST['secteur2'], $NumOrga, $_POST['secteur2'])); }
+
                 break;
                 
             //SUPPRIMER EXPERIENCE

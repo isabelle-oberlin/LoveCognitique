@@ -1,25 +1,28 @@
 <?php 
-session_start();
+    session_start();
 ?>
 <html>
         <?php
             include_once 'includes/head.php';
             include_once 'includes/functions.php';
             
-
+            //affiche la page de l'eleve correspondant
             $IdAlumni = $_GET['id'];
             $requete = getLocalDb()->prepare('select * from alumni where IdAlumni=?');
             $requete->execute(array($IdAlumni));
             $eleve = $requete->fetch();
 
+            //cherche les paramètres de confidentialite de l'eleve pour bien afficher les infos
             $conf = getLocalDb()->prepare('select * from confidentialite where IdAlumni=?');
             $conf->execute(array($IdAlumni));
             $confidentialite = $conf->fetch();
 
+            //cherche les informations relatives à sa commune
             $com = getLocalDb()->prepare('select * from commune where IdCommune=?');
             $com->execute(array($eleve['IdCommune']));
             $commune = $com->fetch();
 
+            //Cherche toutes les expériences d'un élève
             $exp = getLocalDb()->prepare('select *, DATE_FORMAT(DateDeb, "%d/%m/%Y") as DateDebFr, DATE_FORMAT(DateFin, "%d/%m/%Y") as DateFinFr 
                 from experiences, organisations, poste, commune 
                 where IdAlumni=? and organisations.IdOrga = experiences.IdOrga and poste.IdPoste = experiences.IdPoste and commune.IdCommune=organisations.IdCommune order by DateFin desc');
@@ -27,9 +30,11 @@ session_start();
                 $experiences = $exp->fetchAll();
         ?>
     <body>
+
         <?php
             include_once 'includes/header.php';
         ?>
+
         <div class="content">
             <br/>
             <div class="Jumbotron container">
@@ -37,7 +42,6 @@ session_start();
                 
                 <hr class="my-4">
                 <div class="justify-content-center">
-                    <!-- passer en lien vers la promo -->
 
                     <span class="bold">
                         <?php if($confidentialite['ConfiAdresse'] || isAdminConnected()){ ?>
@@ -56,12 +60,15 @@ session_start();
                         Genre : <?= $eleve['Genre'] ?></br>
                         <?php } ?>
                     </span>
+
                 </div>    
                 </br>
-
+                
+                <!-- Affichage des expériences -->
                 <h1 class="display-4">Expériences</h1>
                 <hr class="my-4">
                 <?php foreach($experiences as $experience){ ?>
+
                     <div class="exp">
                         <span class="bold">
                         <?= $experience['TypeExp']," -" ?>
@@ -78,6 +85,7 @@ session_start();
                             echo'<br>';
                         }
                         ?> 
+
                         <?php if($experience['DateFinFr'] == '0000-00-00'){ 
                             echo "Du ",$experience['DateDebFr']," au ",$experience['DateFinFr'],'<br>';
                         }
@@ -85,12 +93,14 @@ session_start();
                             echo "Depuis le ",$experience['DateDebFr'],'<br>';
                         }
                         ?> 
+                        
                         <?= $experience['NomCommune'], ", ",$experience['Region'], ", ", $experience['Pays'] ?>
                         <br><br>
                         <?= $experience['Description'] ?>
                         <br> 
                     </div>
-                    <hr class="my-4">            
+                    <hr class="my-4">  
+
                 <?php } ?>
             </div>
         </div>

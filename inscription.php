@@ -5,13 +5,13 @@ session_start();
         <?php
             include_once 'includes/head.php';
             include_once 'includes/functions.php';
-            
         ?>
 
     <body>
         <?php
             include_once 'includes/header.php';
         ?>
+        
         <div class="content">
             <br/>
             <div class="Jumbotron container">

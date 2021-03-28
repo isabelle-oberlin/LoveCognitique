@@ -6,6 +6,7 @@
     $array = array();
     $bdd=getLocalDb();
 
+    //Prepare la requete selon le type de demande
     $type = $_GET['searchType'];
     switch($type)
     {
@@ -51,7 +52,7 @@
                 <h1 class="display-4">Résultats de la recherche pour <?= $key ?></h1>
                 <hr class="my-4">
                   <?php
-
+                    //affichages distingués
                     foreach($results as $resultat)
                     {
                     switch($type)

@@ -2,7 +2,6 @@
     include_once 'includes/functions.php';       
             
     //formulaire et création du compte. L'administrateur changera simplement le bool "validé"; 
-    //pour l'instant on peut créer un compte avec juste Nom, Promo, Mdp, pas besoin de if, le required html le fait pour nous
     if($_POST != null)
     {
         $bdd = getLocalDb();
