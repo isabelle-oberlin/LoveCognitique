@@ -14,7 +14,7 @@
             break;
         
         case "secteur":
-            $query= $bdd->prepare('select distinct * from experiences, secteur, categorise, alumni where experiences.IdExp = categorise.IdExp and secteur.IdSecteur = categorise.IdSecteur and alumni.IdAlumni=experiences.IdAlumni and NomSecteur like :key');
+            $query= $bdd->prepare('select distinct * from experiences, poste, alumni, organisations, commune where NomPoste like :key and alumni.IdAlumni=experiences.IdAlumni and organisations.IdOrga=experiences.IdOrga and commune.IdCommune=organisations.IdCommune and experiences.IdPoste=poste.IdPoste');
             break;
         
         case "type":
@@ -62,25 +62,25 @@
                         <?php    break;
                         case "region":  ?>
                         <p class="lead"><a href="eleve.php?id=<?= $resultat['IdAlumni'] ?>"><?= $resultat['PrenomEleve']," ",$resultat['NomEleve'] ?></a></p>
-                            <p class="lead"> <?= $resultat['NomCommune'], " ", $resultat['Region']?> </p> 
+                            <p class="lead"> <?= $resultat['NomCommune'], ", ", $resultat['Region']?> </p> 
                             <p class="lead"> <?= "Description : ", $resultat['Description']  ?> </p> <?php
                             break;
 
                         case "secteur": ?>
                         <p class="lead"><a href="eleve.php?id=<?= $resultat['IdAlumni'] ?>"><?= $resultat['PrenomEleve']," ",$resultat['NomEleve'] ?></a></p>
-                            <p class="lead"> <?= $resultat['NomSecteur'], ". Situation: ", $resultat['Region'], " ", $resultat['NomCommune']?> </p> 
+                            <p class="lead"> <?= $resultat['NomSecteur'], ". ", $resultat['Region'], ", ", $resultat['NomCommune']?> </p> 
                             <p class="lead"> <?= "Description : ", $resultat['Description']  ?> </p> <?php
                             break;
                         
                         case "type": ?>
                         <p class="lead"><a href="eleve.php?id=<?= $resultat['IdAlumni'] ?>"><?= $resultat['PrenomEleve']," ",$resultat['NomEleve'] ?></a></p>
-                        <p class="lead"> <?= $resultat['TypeExp'], ". Situation: ", $resultat['Region'], " ", $resultat['NomCommune']?> </p> 
+                        <p class="lead"> <?= $resultat['TypeExp'], ". ", $resultat['Region'], ", ", $resultat['NomCommune']?> </p> 
                         <p class="lead"> <?= "Description : ", $resultat['Description']  ?> </p> <?php
                             break;
 
                         case "poste": ?>
                         <p class="lead"><a href="eleve.php?id=<?= $resultat['IdAlumni'] ?>"><?= $resultat['PrenomEleve']," ",$resultat['NomEleve'] ?></a></p>
-                        <p class="lead"> <?= $resultat['NomPoste'], ". Situation: ", $resultat['Region'], " ", $resultat['NomCommune']?> </p> 
+                        <p class="lead"> <?= $resultat['NomPoste'], ". ", $resultat['Region'], ", ", $resultat['NomCommune']?> </p> 
                         <p class="lead"> <?= "Description : ", $resultat['Description']  ?> </p> <?php
                             break;
                         
