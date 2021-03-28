@@ -315,7 +315,7 @@ session_start();
                             echo'<br>';
                         }
                         ?> 
-                        <?php if(isset($experience['DateFinFr'])){ 
+                        <?php if($experience['DateFinFr'] == '0000-00-00'){ 
                             echo "Du ",$experience['DateDebFr']," au ",$experience['DateFinFr'],'<br>';
                         }
                         else {
@@ -436,8 +436,8 @@ session_start();
                                         </select>
                                     </div>                                        
                                     <div class="select mx-3">
-                                        <select name="poste" placeholder="Pays">
-                                            <option selected disabled>Poste</option>
+                                        <select name="poste" >
+                                            <option selected value="<?= $experience['IdPoste'] ?>">Aucun changement</option>
                                             <?php selectPoste(); ?>
                                         </select>
                                     </div>

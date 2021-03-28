@@ -41,7 +41,7 @@ session_start();
 
                     <span class="bold">
                         <?php if($confidentialite['ConfiAdresse'] || isAdminConnected()){ ?>
-                        Commune : <?= $commune['NomCommune'],", ",$commune['Pays'] ?></br>
+                        Commune : <?= $commune['NomCommune'], ", ",$commune['Region'], ", ", $commune['Pays'] ?></br>
                         <?php } ?>
 
                         <?php if($confidentialite['ConfiMail']|| isAdminConnected()){ ?>
@@ -78,7 +78,7 @@ session_start();
                             echo'<br>';
                         }
                         ?> 
-                        <?php if(isset($experience['DateFinFr'])){ 
+                        <?php if($experience['DateFinFr'] == '0000-00-00'){ 
                             echo "Du ",$experience['DateDebFr']," au ",$experience['DateFinFr'],'<br>';
                         }
                         else {
