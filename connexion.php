@@ -7,7 +7,7 @@ if (!empty($_POST['mail']) and !empty($_POST['password'])) {
     $password = escape($_POST['password']);
     $stmt = getLocalDb()->prepare('select * from alumni where Mail=? and Mdp=?');
     $stmt->execute(array($mail, $password));
-    if ($stmt->rowCount() == 1 && $stmt['valide'] == 1) {
+    if ($stmt->rowCount() == 1) {
         // L'utilisateur existe bien (on a une ligne de réponse) et a été validé
         $_SESSION['mail'] = $mail;
         redirect('index.php');
