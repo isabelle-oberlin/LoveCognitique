@@ -28,9 +28,9 @@ session_start();
 <body>
   
     <?php require_once "includes/header.php"; ?>
-
-    <div class="container content">
-    <div class="topnav" >
+    <br/>
+    <div class="Jumbotron container content">
+    <div class="topnav" ><br/>
         <h3> Entrez une promo (année de sortie): </h3>
     </div> 
 
@@ -41,7 +41,7 @@ session_start();
                 <button type="submit" class="searchButton"><i class="fa fa-search"></i></button>
             </div>
         </div>
-     </form>
+     </form><br/>
        
         <table class="table">
             <thead>
@@ -59,8 +59,9 @@ session_start();
                 <tr>
                 
                 <th scope="row"><?= $i++; ?></th>
-                   <td><?= $eleve['PrenomEleve'] ?></td> 
-                    <td><?= $eleve['NomEleve'] ?></td>
+                   <td><a href="eleve.php?id=<?= $eleve['IdAlumni'] ?>"><?= $eleve['PrenomEleve'] ?></a></td> 
+                    <td><a href="eleve.php?id=<?= $eleve['IdAlumni'] ?>"><?= $eleve['NomEleve'] ?></a></td>
+                
                 </tr>
             <?php } ?>
             <tbody>
