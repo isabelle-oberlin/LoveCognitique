@@ -57,19 +57,34 @@
                             <p class="lead"><a href="eleve.php?id=<?= $resultat['IdAlumni'] ?>"><?= $resultat['PrenomEleve']," ",$resultat['NomEleve'] ?></a></p>
                             <p>Promotion : <?= $resultat['Promo'] ?> <?php if($resultat['ConfiAdresse'] == 1){?> Commune: <?php print $resultat['NomCommune']; } ?></p>
                         <?php    break;
-                        case "secteur": ?>
-                        <!-- PAS FINI L AFFICHAGE: S ADAPTER AUX DIFFERENTS CASES -->
-
-                            <p class="lead"><a href="eleve.php?id=<?= $resultat['IdAlumni'] ?>"><?= $resultat['PrenomEleve']," ",$resultat['NomEleve'] ?></a></p>
-                            <p>Promotion : <?= $resultat['Promo'] ?> <?php if($resultat['ConfiAdresse'] == 1){?> Commune: <?php print $resultat['NomCommune']; } ?></p>
-<?
-                            break;
-
-                        case "type":
-                            break;
-                        
-                        case "region":
-                            break;
+                        case "secteur" || "type" || "region": ?>
+                            <?php foreach($resultat as $ceresultat){ ?>
+                            <div class="exp">
+                            <span class="bold">
+                      
+                            <?php if(isset($ceresultat['NomPoste'])){ 
+                            echo "Poste : ",$ceresultat['NomPoste'],"<br>";
+                            }
+                            $listesecteur = getSecteurs($ceresultat['IdExp']);
+                            if(isset($listesecteur)){
+                            echo "Secteur.s : ";
+                            foreach (getSecteurs($ceresultat['IdExp']) as $sect){ print $sect['NomSecteur'].' '; }
+                            echo'<br>';
+                            }
+                            ?> 
+                            <?php if(isset($ceresultat['DateFinFr'])){ 
+                            echo "Du ",$ceresultat['DateDebFr']," au ",$ceresultat['DateFinFr'],'<br>';
+                            }
+                            else {
+                            echo "Depuis le ",$ceresultat['DateDebFr'],'<br>';
+                            }
+                            ?> 
+                            <?= $ceresultat['NomCommune'], ", ",$ceresultat['Region'], ", ", $ceresultat['Pays'] ?>
+                            <br><br>
+                            <?= $ceresultat['Description']  ?>
+                            <br>
+                            <?php 
+                                break;}
                     }
                     ?>
                     <?php }
