@@ -7,8 +7,8 @@ session_start();
 
 <?php 
     require_once "includes/head.php"; 
-    if (empty($_POST['recherche']) == false){
-        $key = escape($_POST['recherche']);
+    if (empty($_GET['recherche']) == false){
+        $key = escape($_GET['recherche']);
     }
     else //éviter l'erreur d'index indéfini quand l'utilisateur n'a pas encore tapé dans la barre de recherche
     {
@@ -34,14 +34,15 @@ session_start();
         <h3> Entrez une promo (année de sortie): </h3>
     </div> 
 
-    <form action = "promotions.php" method = "POST">
+    <form action = "promotions.php" method = "GET">
         <div class="sb-example-1 row justify-content-center">
             <div class="search">
                 <input type="text" class="searchTerm" name="recherche" placeholder="Entrez une année de promotion" required>
                 <button type="submit" class="searchButton"><i class="fa fa-search"></i></button>
             </div>
         </div>
-     </form><br/>
+    </form><br/>
+
        
         <table class="table">
             <thead>
@@ -60,7 +61,7 @@ session_start();
                 
                 <th scope="row"><?= $i++; ?></th>
                    <td><a href="eleve.php?id=<?= $eleve['IdAlumni'] ?>"><?= $eleve['PrenomEleve'] ?></a></td> 
-                    <td><a href="eleve.php?id=<?= $eleve['IdAlumni'] ?>"><?= $eleve['NomEleve'] ?></a></td>
+                   <td><a href="eleve.php?id=<?= $eleve['IdAlumni'] ?>"><?= $eleve['NomEleve'] ?></a></td>
                 
                 </tr>
             <?php } ?>

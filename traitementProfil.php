@@ -29,6 +29,7 @@
                 $categorisation = $bdd->prepare('replace into categorise values (?,?); insert into appartient values (?,?)');
                 if(isset($_POST['secteur1'])){ $categorisation->execute(array($new_id, $_POST['secteur1'], $NumOrga, $_POST['secteur1'])); $categorisation->closeCursor(); }
                 if(isset($_POST['secteur2'])){ $categorisation->execute(array($new_id, $_POST['secteur2'], $NumOrga, $_POST['secteur2'])); }
+                break;
                 
             //SUPPRIMER EXPERIENCE
             case "suppr":
@@ -36,6 +37,7 @@
                 //parametre id passe en hidden
                 $query->bindValue(':idexp', escape($_POST['id']));
                 $query->execute();
+                break;
             
             //EDITER EXPERIENCE
             case "update":
@@ -50,6 +52,7 @@
                 $categorisation = $bdd->prepare('replace into categorise values (?,?); insert into appartient values (?,?)');
                 if(isset($_POST['secteur1'])){ $categorisation->execute(array($IdExp, $_POST['secteur1'], $NumOrga, $_POST['secteur1'])); $categorisation->closeCursor(); }
                 if(isset($_POST['secteur2'])){ $categorisation->execute(array($IdExp, $_POST['secteur2'], $NumOrga, $_POST['secteur2'])); }
+                break;
 
             //MODIFIER PROFIL
             case "updateProfile" : 
@@ -82,6 +85,7 @@
                 $confidentialite->bindValue(':ConfiTel', $confiTel);
                 $confidentialite->bindValue(':IdAlumni', $id);
                 $confidentialite->execute();
+                break;
 
         }
         redirect('monprofil.php');
