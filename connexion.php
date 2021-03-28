@@ -9,7 +9,7 @@ if (!empty($_POST['mail']) and !empty($_POST['password'])) {
     $stmt->execute(array($mail, $password));
     $connexion = $stmt->fetch();
     if ($stmt->rowCount() == 1){
-        if (isset($connexion['Valide'])) {
+        if ($connexion['Valide'] == 1) {
             // L'utilisateur existe bien (on a une ligne de réponse) et a été validé
             $_SESSION['mail'] = $mail;
             redirect('index.php');
