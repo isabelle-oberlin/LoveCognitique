@@ -14,7 +14,7 @@
             break;
         
         case "secteur":
-            $query= $bdd->prepare('select distinct * from experiences, poste, alumni, organisations, commune where NomPoste like :key and alumni.IdAlumni=experiences.IdAlumni and organisations.IdOrga=experiences.IdOrga and commune.IdCommune=organisations.IdCommune and experiences.IdPoste=poste.IdPoste');
+            $query= $bdd->prepare('select distinct * from experiences, alumni, organisations, commune, secteur, categorise where NomSecteur like :key and alumni.IdAlumni=experiences.IdAlumni and organisations.IdOrga=experiences.IdOrga and commune.IdCommune=organisations.IdCommune and categorise.IdSecteur=secteur.IdSecteur and experiences.IdExp=categorise.IdExp');
             break;
         
         case "type":
