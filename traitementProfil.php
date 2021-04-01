@@ -77,10 +77,10 @@
                 $stmt->bindValue(':IdAlumni', $id);
                 $stmt->execute();
                 
-                if($_POST['confiadresse'] != 0){$confiAdresse = 1;} else{$confiAdresse = 0;}
-                if($_POST['confimail'] != 0){$confiMail = 1;} else{$confiMail = 0;}
-                if($_POST['confitel'] != 0){$confiTel = 1;} else{$confiTel = 0;}
-                if($_POST['configenre'] != 0){$confiGenre = 1;} else{$confiGenre = 0;}
+                if($_POST['confiadresse'] == 1){$confiAdresse = 1;} else{$confiAdresse = 0;}
+                if($_POST['confimail'] == 1){$confiMail = 1;} else{$confiMail = 0;}
+                if($_POST['confitel'] == 1){$confiTel = 1;} else{$confiTel = 0;}
+                if($_POST['configenre'] == 1){$confiGenre = 1;} else{$confiGenre = 0;}
 
                 $confidentialite = $bdd->prepare('UPDATE confidentialite SET ConfiAdresse=:ConfiAdresse, ConfiMail=:ConfiMail, ConfiGenre=:ConfiGenre, ConfiTel=:ConfiTel where IdAlumni=:IdAlumni');
                 $confidentialite->bindValue(':ConfiAdresse', $confiAdresse);
