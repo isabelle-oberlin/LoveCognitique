@@ -33,6 +33,28 @@
                 if(isset($_POST['secteur1'])){ $categorisation->execute(array($new_id, $_POST['secteur1'], $NumOrga, $_POST['secteur1'])); $categorisation->closeCursor(); }
                 if(isset($_POST['secteur2'])){ $categorisation->execute(array($new_id, $_POST['secteur2'], $NumOrga, $_POST['secteur2'])); }
 
+                //insertion d'un secteur 
+                $query2= $bdd->prepare('select max(IdSecteur) from secteur');
+                $query2->execute();
+                $new_id = $query2->fetch();
+                $new_id = $new_id['max(IdSecteur)'];
+                $new_id += 1;
+                $ajoutsecteur = $bdd->prepare('insert into secteur values (?,?,?,?)');
+                if(isset($_POST['nomsecteur']) && isset($_POST['desccourte']) && isset($_POST['desclongue'])){
+                    $ajoutsecteur->execute(array($new_id, escape($_POST['nomsecteur']), escape($_POST['desccourte']), escape($_POST['desclongue'])));
+                }
+
+                //insertion d'un poste
+                $query3= $bdd->prepare('select max(IdPoste) from poste');
+                $query3->execute();
+                $new_id = $query3->fetch();
+                $new_id = $new_id['max(IdPoste)'];
+                $new_id += 1;
+                $ajoutsecteur = $bdd->prepare('insert into secteur values (?,?,?)');
+                if(isset($_POST['nomposte']) && isset($_POST['descposte'])){
+                    $ajoutsecteur->execute(array($new_id, escape($_POST['nomposte']), escape($_POST['descposte'])));
+                }
+
                 break;
                 
             //SUPPRIMER EXPERIENCE
@@ -81,8 +103,7 @@
                 if($_POST['confimail'] == "on"){$confiMail = 1;} else{$confiMail = 0;}
                 if($_POST['confitel'] == "on"){$confiTel = 1;} else{$confiTel = 0;}
                 if($_POST['configenre'] == "on"){$confiGenre = 1;} else{$confiGenre = 0;}
-                print_r($_POST);
-                echo " $confiAdresse, $confiMail, $confiTel, $confiGenre, $id";
+
                 $confidentialite = $bdd->prepare('UPDATE confidentialite SET ConfiAdresse=:ConfiAdresse, ConfiMail=:ConfiMail, ConfiGenre=:ConfiGenre, ConfiTel=:ConfiTel where IdAlumni=:IdAlumni');
                 $confidentialite->bindValue(':ConfiAdresse', $confiAdresse);
                 $confidentialite->bindValue(':ConfiMail', $confiMail);
@@ -93,6 +114,6 @@
                 break;
 
         }
-        //redirect('monprofil.php');
+        redirect('monprofil.php');
     }
 ?>
